@@ -53,7 +53,7 @@
 
                     <div class="form-group mb-3">
                         <label class="form-label">Confirm Password</label>
-                        <input class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Enter confirm password" th:field="*{confirmPassword}" type="password" onkeyup="validate_password()"/>
+                        <input class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Enter confirm password" th:field="*{confirmPassword}" type="password" />
                         <p th:errors = "*{confirmPassword}" class="text-danger"  th:if="${#fields.hasErrors('confirmPassword')}"></p>
 
                     </div>

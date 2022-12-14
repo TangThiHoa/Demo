@@ -1,4 +1,5 @@
 package com.example.task.controller;
+
 import com.example.task.Entity.User;
 import com.example.task.Repository.UserRepository;
 import com.example.task.request.UserLoginRequest;
@@ -12,22 +13,15 @@ import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
-
 
 
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private RoleService roleService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Autowired
     private UserRepository userRepository;
 
@@ -66,30 +60,23 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public String users(Model model) {
-        List<Object> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "user";
+    public String users(Model model, @ModelAttribute UserLoginRequest user) {
+        model.addAttribute("userLogin", user);
+        User email = userRepository.findByEmail(user.getEmail());
+        if (ObjectUtils.isEmpty(email)) {
+            return "redirect:/login";
+        }
+        if (!email.getPassword().equals(user.getPassword())) {
+            return "redirect:/login";
+        }
+        model.addAttribute("userList", userRepository.findAll());
+        return "/user";
     }
 
     @GetMapping("/login")
-    public String login(Model model, @ModelAttribute UserLoginRequest request) {
-        model.addAttribute("userLogin", request);
-        return "login";
-    }
-
-    @PostMapping("/login/save")
-    public String login(@Valid @ModelAttribute("userLogin") UserLoginRequest user, Model model) {
-        User email = userRepository.findByEmail(user.getEmail());
-        if (!ObjectUtils.isEmpty(email)) {
-            if (!email.getPassword().equals(user.getPassword())) {
-                return "/logError";
-            }
-        } else {
-            return "/logError";
-        }
+    public String login(Model model, @ModelAttribute UserLoginRequest user) {
         model.addAttribute("userLogin", user);
-        return "/user";
+        return "login";
     }
 
 
