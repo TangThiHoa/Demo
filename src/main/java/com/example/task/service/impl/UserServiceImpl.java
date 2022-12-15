@@ -1,15 +1,17 @@
 package com.example.task.service.impl;
+
 import com.example.task.Entity.Role;
 import com.example.task.Entity.User;
 import com.example.task.Repository.RoleRepository;
 import com.example.task.Repository.UserRepository;
+import com.example.task.request.UserLoginRequest;
 import com.example.task.request.UserRequest;
 import com.example.task.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,11 +22,13 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
     private RoleRepository roleRepository;
 
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
 
     public UserServiceImpl(UserRepository userRepository,
@@ -114,12 +118,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkLogin(User user) {
+    public boolean checkLogin(UserLoginRequest user) {
         Iterable<User> users = this.findAll();
         boolean isCorrectUser = false;
         for (User currentUser : users) {
-            if (currentUser.getUsername().equals(user.getUsername())
-                    && currentUser.getPassword().equals(user.getPassword())){
+            if (currentUser.getEmail().equals(user.getEmail())
+                    && currentUser.getPassword().equals(user.getPassword())) {
                 isCorrectUser = true;
                 break;
             }

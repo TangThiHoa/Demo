@@ -1,6 +1,7 @@
 package com.example.task.service;
 
 import com.example.task.Entity.User;
+import com.example.task.request.UserLoginRequest;
 import com.example.task.request.UserRequest;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -19,7 +20,7 @@ public interface UserService extends UserDetailsService {
 
     Iterable<User> findAll();
 
-    boolean checkLogin(User user);
+    boolean checkLogin(UserLoginRequest user);
 
     boolean isCorrectConfirmPassword(UserRequest userRequest);
 }
