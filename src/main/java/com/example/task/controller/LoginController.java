@@ -1,9 +1,20 @@
 package com.example.task.controller;
+
 import com.example.task.Entity.User;
 import com.example.task.Repository.UserRepository;
 import com.example.task.request.UserLoginRequest;
 import com.example.task.service.UserService;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +34,13 @@ public class LoginController {
     private UserRepository userRepository;
 
     @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @GetMapping("/login")
     public String login(Model model, @ModelAttribute UserLoginRequest user) {
@@ -35,21 +51,11 @@ public class LoginController {
     @GetMapping("/user")
     public String users(Model model, @Valid @ModelAttribute("userLogin") UserLoginRequest user, BindingResult result) {
         model.addAttribute("userLogin", user);
-        User email = userRepository.findByEmail(user.getEmail());
-        if (!ObjectUtils.isEmpty(email)) {
-            //*****
-            String password = passwordEncoder.encode(user.getPassword());
-            System.out.println(password);
-            System.out.println(email.getPassword());
-            if (!email.getPassword().equals(password)) {
-                result.rejectValue("password", "null", "Password invalid");
-            }
-        } else {
-            result.rejectValue("email", "null", "Email invalid");
-        }
-
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         if (result.hasErrors()) {
-            model.addAttribute("user", user);
+            model.addAttribute("user", authentication);
             return "/login";
         }
         model.addAttribute("userList", userRepository.findAll());
