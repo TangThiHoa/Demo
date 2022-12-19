@@ -39,6 +39,10 @@
                 </div>
                 <div class="card-body">
                     <form method="get" role="form" th:action="@{/user}" th:object="${userLogin}">
+                        <!-- error message -->
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger">Invalid username or password.</div>
+                        </div>
                         <div class="form-group mb-3">
                             <label class="control-label"> Email</label>
                             <input type="email" id="email" name="email" class="form-control"

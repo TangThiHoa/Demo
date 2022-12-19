@@ -14,13 +14,5 @@ public interface UserService extends UserDetailsService {
 
     User findUserByEmail(String email);
 
-    List<Object> findAllUsers();
-
-    boolean isRegister(User user);
-
-    Iterable<User> findAll();
-
-    boolean checkLogin(UserLoginRequest user);
-
     boolean isCorrectConfirmPassword(UserRequest userRequest);
 }

@@ -58,33 +58,12 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    public List<Object> findAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
-                .map((user) -> mapToUserRequest(user))
-                .collect(Collectors.toList());
-    }
-
-    private Object mapToUserRequest(User user) {
-        UserRequest userRequest = new UserRequest();
-        String[] str = user.getUsername().split(" ");
-        String[] str2 = user.getEmail().split(" ");
-        userRequest.setUsername(str[0]);
-        userRequest.setEmail(str2[0]);
-        return userRequest;
-    }
-
-
     private Role checkRoleExist() {
         Role role = new Role();
         role.setName("ROLE_ADMIN");
         return roleRepository.save(role);
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -101,36 +80,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isRegister(User user) {
-        boolean isRegister = false;
-        Iterable<User> users = this.findAll();
-        for (User currentUser : users) {
-            if (user.getUsername().equals(currentUser.getUsername())) {
-                isRegister = true;
-                break;
-            }
-        }
-        return isRegister;
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
-    @Override
-    public Iterable<User> findAll() {
-        return userRepository.findAll();
-    }
 
-    @Override
-    public boolean checkLogin(UserLoginRequest user) {
-        Iterable<User> users = this.findAll();
-        boolean isCorrectUser = false;
-        for (User currentUser : users) {
-            if (currentUser.getEmail().equals(user.getEmail())
-                    && currentUser.getPassword().equals(user.getPassword())) {
-                isCorrectUser = true;
-                break;
-            }
-        }
-        return isCorrectUser;
-    }
 
     @Override
     public boolean isCorrectConfirmPassword(UserRequest user) {
