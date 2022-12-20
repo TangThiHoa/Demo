@@ -1,24 +1,18 @@
-package com.example.task.Entity;
+package com.example.task.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Entity
-@Table(name = "Project")
-public class Project {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProjectRequest {
     private Long id;
+    @NotNull(message = "Name not is null")
     private String name;
+    @NotNull(message = "Description not is null")
     private String description;
-
-
 }
-
-
