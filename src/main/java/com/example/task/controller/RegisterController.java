@@ -24,7 +24,7 @@ public class RegisterController {
     public String showRegistrationForm(Model model) {
         UserRequest user = new UserRequest();
         model.addAttribute("user", user);
-        return "/register";
+        return "register";
     }
 
     @PostMapping("/register/save")

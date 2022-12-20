@@ -9,6 +9,7 @@
           crossorigin="anonymous">
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand"></a>
@@ -32,40 +33,34 @@
     <div class="row col-md-8 offset-md-2">
         <div class="card">
             <div class="card-header">
-                <h2 class="text-center">Registration</h2>
+                <h2 class="text-center">Update user</h2>
             </div>
             <div class="card-body">
-                <form  method="post" role="form" th:action="@{/register/save}" th:object="${user}">
+<!--                <th:block th:if="${message}">-->
+<!--                    <p th:text="${message}"></p>-->
+<!--                </th:block>-->
+                <form  method="post" role="form" th:action="@{/user/update/{id}(id=${id})}"  th:object="${users}">
                     <div class="form-group mb-3">
                         <label class="form-label">User Name</label>
-                        <input class="form-control" id="userName" name="userName" placeholder="Enter user name" th:field="*{userName}" type="text"/>
-                        <p th:errors = "*{userName}" class="text-danger"  th:if="${#fields.hasErrors('userName')}"></p>
+                        <input class="form-control" id="userName" name="userName" placeholder="Enter user name" th:value="*{username}" type="text"/>
                     </div>
-
                     <div class="form-group mb-3">
                         <label class="form-label">Password</label>
-                        <input class="form-control" id="password" name="password" placeholder="Enter password" th:field="*{password}" type="password"/>
-                        <p th:errors = "*{password}" class="text-danger"  th:if="${#fields.hasErrors('password')}"></p>
+                        <input class="form-control" id="password" name="password" placeholder="Enter password" th:value="*{password}" type="password"/>
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">Email</label>
-                        <input class="form-control" id="email" name="email" placeholder="Enter email address"  th:field="*{email}" type="email"/>
-                        <p th:errors = "*{email}" class="text-danger"  th:if="${#fields.hasErrors('email')}"></p>
+                        <input class="form-control" id="email" name="email" placeholder="Enter email address"  th:value="*{email}" type="email"/>
 
                     </div>
-
                     <div class="form-group mb-3">
                         <label class="form-label">Confirm Password</label>
-                        <input class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Enter confirm password" th:field="*{confirmPassword}" type="password" />
-                        <p th:errors = "*{confirmPassword}" class="text-danger"  th:if="${#fields.hasErrors('confirmPassword')}"></p>
+                        <input class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Enter confirm password" th:value="*{confirmPassword}" type="password" />
 
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-primary" type="submit" >Register</button>
-<!--                        <a th:href="@{/login}" class="btn btn-large btn-primary">Register</a>-->
-
-                        <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+                        <button class="btn btn-primary" type="submit" >Submit</button>
                     </div>
                 </form>
             </div>

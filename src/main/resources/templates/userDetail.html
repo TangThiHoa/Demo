@@ -29,31 +29,25 @@
 </nav>
 <div class="container">
     <div class="row col-md-10">
-        <h2>List Users</h2>
+        <h2>UserDetail</h2>
     </div>
-    <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>UserName</th>
-            <th>Email</th>
-            <th>Action</th>
-            <th>Action</th>
-            <th>Action</th>
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>UserName</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr >
+                <td th:text="${users.id}"></td>
+                <td th:text="${users.username}"></td>
+                <td th:text="${users.email}"></td>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item,rowStat : ${userList}">
-            <td th:text="${item.getId()}"></td>
-            <td th:text="${item.getUsername()}"></td>
-            <td th:text="${item.getEmail()}"></td>
-            <td><a th:href="@{/user/detail/{id}(id=${item.getId()})}">Detail</a></td>
-            <td><a th:href="@{user/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/user/delete/{id}(id=${item.getId()})}">Delete</a></td>
-        </tr>
-        </tbody>
-    </table>
+            </tr>
+            </tbody>
+        </table>
 </div>
 </body>
 </html>

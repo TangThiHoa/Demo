@@ -46,10 +46,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
                 .defaultSuccessUrl("/login")
                 .permitAll()
                 .and().logout().permitAll()
                 .and().exceptionHandling();
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .permitAll()
+//                .usernameParameter("email")
+//                .passwordParameter("password")
+//                .defaultSuccessUrl("/")
+//                .failureUrl("/login?error")
+//                .and()
+//                .exceptionHandling()
+//                .accessDeniedPage("/403");
     }
 
     @Autowired

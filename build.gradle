@@ -37,6 +37,9 @@ dependencies {
     implementation 'org.webjars:bootstrap:4.3.1'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
     implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.5'
+    // https://mvnrepository.com/artifact/org.webjars/bootstrap
+    implementation 'org.webjars:bootstrap:4.1.3'
+
 
 
 

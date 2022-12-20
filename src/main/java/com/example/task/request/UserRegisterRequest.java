@@ -12,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserRegisterRequest {
     private Long id;
-    private String username;
+    private String userName;
     private String password;
     private String confirmPassword;
     private String email;

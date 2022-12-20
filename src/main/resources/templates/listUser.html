@@ -37,20 +37,16 @@
             <th>ID</th>
             <th>UserName</th>
             <th>Email</th>
-            <th>Action</th>
-            <th>Action</th>
-            <th>Action</th>
+
 
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item,rowStat : ${userList}">
+        <tr th:each="item,rowStat : ${users}">
             <td th:text="${item.getId()}"></td>
             <td th:text="${item.getUsername()}"></td>
             <td th:text="${item.getEmail()}"></td>
-            <td><a th:href="@{/user/detail/{id}(id=${item.getId()})}">Detail</a></td>
-            <td><a th:href="@{user/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/user/delete/{id}(id=${item.getId()})}">Delete</a></td>
+
         </tr>
         </tbody>
     </table>

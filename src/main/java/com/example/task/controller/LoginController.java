@@ -36,11 +36,6 @@ public class LoginController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     @GetMapping("/login")
     public String login(Model model, @ModelAttribute UserLoginRequest user) {
@@ -54,10 +49,6 @@ public class LoginController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        if (result.hasErrors()) {
-            model.addAttribute("user", authentication);
-            return "/login";
-        }
         model.addAttribute("userList", userRepository.findAll());
         return "/user";
     }
