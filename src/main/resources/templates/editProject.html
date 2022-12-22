@@ -24,8 +24,8 @@
           <form method="post" role="form" th:action="@{/project/update/{id}(id=${id})}" th:object="${projects}">
             <div class="form-group mb-3">
               <label class="control-label"> Name</label>
-              <input type="text" id="name" name="name" class="form-control" placeholder="Enter name project" th:value ="*{name}"  />
-              <p th:errors="*{name}" class="text-danger" th:if="${#fields.errors('name')}"></p>
+              <input type="text" id="projectName" name="projectName" class="form-control" placeholder="Enter name project" th:value ="*{projectName}"  />
+              <p th:errors="*{projectName}" class="text-danger" th:if="${#fields.errors('projectName')}"></p>
             </div>
 
             <div class="form-group mb-3">

@@ -1,7 +1,8 @@
 package com.example.task.controller;
 
-import com.example.task.Entity.Project;
 import com.example.task.Entity.Task;
+import com.example.task.Repository.ProjectRepository;
+import com.example.task.Repository.UserRepository;
 import com.example.task.service.ProjectService;
 import com.example.task.service.TaskService;
 import com.example.task.service.UserService;
@@ -15,17 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/task")
-public class AddTaskController {
+public class TaskController {
     @Autowired
-    TaskService taskService;
+    private TaskService taskService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    ProjectService projectService;
+    private ProjectService projectService;
+
+
 
     @GetMapping("/add")
     public String addForm(Model model) {
@@ -36,11 +40,17 @@ public class AddTaskController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("newTask") Task task , Model model) {
-        model.addAttribute("user", userService.findAll());
-        model.addAttribute("project", projectService.findAll());
+    public String create(@Valid @ModelAttribute("newTask") Task task) {
         taskService.save(task);
-        return "addTask";
+        return "listTask";
+
+    }
+
+    @GetMapping("/list")
+    public String listTask(Model model) {
+        List<Task> taskList = taskService.findAll();
+        model.addAttribute("tasks", taskList);
+        return "listTask";
 
     }
 }

@@ -24,7 +24,7 @@ public class EditProjectController {
     @PostMapping("/update/{id}")
     public ModelAndView updateProject(@PathVariable Long id, @ModelAttribute("projects")Project project){
         Project projectServiceById = projectService.findById(id);
-        projectServiceById.setName(project.getName());
+        projectServiceById.setProjectName(project.getProjectName());
         projectServiceById.setDescription(project.getDescription());
         projectService.save(projectServiceById);
         ModelAndView modelAndView = new ModelAndView("listProject");

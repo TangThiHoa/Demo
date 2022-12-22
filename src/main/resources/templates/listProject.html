@@ -46,7 +46,7 @@
     <tbody>
     <tr th:each="item,rowStat : ${projects}">
       <td th:text="${item.getId()}"></td>
-      <td th:text="${item.getName()}"></td>
+      <td th:text="${item.getProjectName()}"></td>
       <td th:text="${item.getDescription()}"></td>
       <td><a th:href="@{/project/detail/{id}(id=${item.getId()})}">Detail</a></td>
       <td><a th:href="@{/project/edit/{id}(id=${item.getId()})}">Edit</a></td>
