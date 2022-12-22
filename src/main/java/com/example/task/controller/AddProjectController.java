@@ -28,9 +28,9 @@ public class AddProjectController {
     @PostMapping("/create")
     public ModelAndView saveProject(@Valid @ModelAttribute("project") Project project) {
         projectService.save(project);
-        ModelAndView modelAndView = new ModelAndView("addProject");
+        ModelAndView modelAndView = new ModelAndView("listProject");
         modelAndView.addObject("project", new Project());
-        modelAndView.addObject("message", "New customer created successfully");
+        modelAndView.addObject("projects", projectService.findAll());
         return modelAndView;
     }
 
