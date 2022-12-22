@@ -39,18 +39,13 @@ public class TaskController {
         return "addTask";
     }
 
-    @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("newTask") Task task) {
+    @PostMapping("/project")
+    public String create(@Valid @ModelAttribute("newTask") Task task,Model model) {
         taskService.save(task);
-        return "listTask";
-
-    }
-
-    @GetMapping("/list")
-    public String listTask(Model model) {
         List<Task> taskList = taskService.findAll();
         model.addAttribute("tasks", taskList);
-        return "listTask";
+        return "/listTask";
 
     }
+
 }
