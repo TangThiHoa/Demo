@@ -40,48 +40,48 @@ public class TaskController {
         List<Task> taskList = taskService.findAll();
         model.addAttribute("tasks", taskList);
         return "/listTask";
-
     }
 
     @GetMapping("/list")
-    public String listTask(@Valid @ModelAttribute("newTask") Task task, Model model) {
+    public String listTask(Model model) {
         List<Task> taskList = taskService.findAll();
         model.addAttribute("tasks", taskList);
         return "/listTask";
-
     }
 
     @GetMapping("/detail/{id}")
-    public String detailTask(@PathVariable Long id,Model model){
+    public String detailTask(@PathVariable Long id, Model model) {
         model.addAttribute("tasks", taskService.findById(id));
         return "/detailTask";
     }
 
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
-        model.addAttribute("tasks", taskService.findById(id));
+        model.addAttribute("updateTask", taskService.findById(id));
+        model.addAttribute("user", userService.findAll());
+        model.addAttribute("project", projectService.findAll());
         return "editTask";
     }
 
-    @PostMapping("/update/{id}")
-    public String updateTask(@ModelAttribute("tasks") Task task, @PathVariable Long id, Model model) {
-        Task taskServiceById = taskService.findById(id);
-        taskServiceById.setName(task.getName());
-        taskServiceById.setUser(task.getUser());
-        taskServiceById.setProject(task.getProject());
-        taskService.save(taskServiceById);
-        return  "/listTask";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteTask(@PathVariable Long id, Model model){
-        taskService.remove(id);
-        List<Task> tasks = taskService.findAll();
-        model.addAttribute("tasks",tasks);
+    @PostMapping("/list/{id}")
+    public String updateTask(@ModelAttribute("updateTask") Task task, @PathVariable Long id, Model model) {
+        Task updateTask = taskService.findById(id);
+        updateTask.setName(task.getName());
+        updateTask.setUser(task.getUser());
+        updateTask.setProject(task.getProject());
+        taskService.save(updateTask);
+        List<Task> taskList = taskService.findAll();
+        model.addAttribute("tasks", taskList);
         return "/listTask";
     }
 
-
+    @GetMapping("/delete/{id}")
+    public String deleteTask(@PathVariable Long id, Model model) {
+        taskService.remove(id);
+        List<Task> tasks = taskService.findAll();
+        model.addAttribute("tasks", tasks);
+        return "/listTask";
+    }
 
 
 }
