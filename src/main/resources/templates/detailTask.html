@@ -21,10 +21,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
+          <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/project/add}">Add Project</a>
+          <a class="nav-link active" aria-current="page" th:href="@{/task/list}"> Manager Task </a>
         </li>
       </ul>
     </div>
@@ -32,28 +32,23 @@
 </nav>
 <div class="container">
   <div class="row col-md-10">
-    <h2> Manager Project </h2>
+    <h2>UserDetail</h2>
   </div>
   <table class="table table-bordered table-hover">
     <thead class="table-dark">
     <tr>
       <th>ID</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Action</th>
-      <th>Action</th>
-      <th>Action</th>
-
+      <th> Task Name</th>
+      <th> Task By User</th>
+      <th> Task of Project</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="item,rowStat : ${projects}">
-      <td th:text="${item.getId()}"></td>
-      <td th:text="${item.getProjectName()}"></td>
-      <td th:text="${item.getDescription()}"></td>
-      <td><a th:href="@{/project/detail/{id}(id=${item.getId()})}">Detail</a></td>
-      <td><a th:href="@{/project/edit/{id}(id=${item.getId()})}">Edit</a></td>
-      <td><a th:href="@{/project/delete/{id}(id=${item.getId()})}">Delete</a></td>
+    <tr>
+      <td th:text="${tasks.id}"></td>
+      <td th:text="${tasks.name}"></td>
+      <td th:text="${tasks.user.getUsername()}"></td>
+      <td th:text="${tasks.project.getProjectName()}"></td>
     </tr>
     </tbody>
   </table>

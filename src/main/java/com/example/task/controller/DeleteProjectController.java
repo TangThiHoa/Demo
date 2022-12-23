@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("project")
-public class DeleteController {
+public class DeleteProjectController {
     @Autowired
     ProjectService projectService;
 

@@ -23,13 +23,16 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/task/add}">Add Task</a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="container">
     <div class="row col-md-10">
-        <h2>List Users</h2>
+        <h2>Manager Task</h2>
     </div>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
@@ -38,6 +41,10 @@
             <th> Task Name</th>
             <th> Task By User</th>
             <th> Task of Project</th>
+            <th> Action</th>
+            <th> Action</th>
+            <th> Action</th>
+
         </tr>
         </thead>
         <tbody>
@@ -46,7 +53,9 @@
             <td th:text="${item.getName()}"></td>
             <td th:text="${item.getUser().getUsername()}"></td>
             <td th:text="${item.getProject().getProjectName()}"></td>
-
+            <td><a th:href="@{/task/detail/{id}(id=${item.getId()})}">Detail</a></td>
+            <td><a th:href="@{/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
+            <td><a th:href="@{/task/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>
