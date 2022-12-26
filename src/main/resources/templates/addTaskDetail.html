@@ -1,10 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
 </head>
 <body>
-$END$
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <br>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Add Task Detail</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" role="form" th:action="@{/taskDetail/newList}" th:object="${addTask}">
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Task</label>
+                            <select id="task" name="task" class="custom-select" th:field="*{task}">
+                                <option th:each="taskItem: ${task}" th:value="${taskItem.getId()}"
+                                        th:text="${taskItem.getName()}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Link Project</label>
+                            <input type="text" id="linkTask" name="linkTask" class="form-control"
+                                   placeholder="Link Task" th:field="*{linkTask}"/>
+                            <p th:errors="*{linkTask}" class="text-danger" th:if="${#fields.errors('linkTask')}"></p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Link Task</label>
+                            <input type="text" id="linkProject" name="linkProject" class="form-control"
+                                   placeholder="Link Project" th:field="*{linkProject}"/>
+                            <p th:errors="*{linkProject}" class="text-danger"
+                               th:if="${#fields.errors('linkProject')}"></p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Description</label>
+                            <input type="text" id="description" name="description" class="form-control"
+                                   placeholder="Enter name description" th:field="*{description}"/>
+                            <p th:errors="*{description}" class="text-danger"
+                               th:if="${#fields.errors('description')}"></p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label">Note</label>
+                            <input type="text" id="note" name="linkProject" class="form-control"
+                                   placeholder="Enter name note" th:field="*{note}"/>
+                            <p th:errors="*{note}" class="text-danger" th:if="${#fields.errors('note')}"></p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Point </label>
+                            <input type="number+" id="point" name="point" class="form-control"
+                                   placeholder="Enter name project" th:field="*{point}"/>
+                            <p th:errors="*{point}" class="text-danger" th:if="${#fields.errors('point')}"></p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Estimate Date </label>
+                            <input type="text" id="estimateDate" name="estimateDate" class="form-control"
+                                   placeholder="Enter name estimateDate" th:field="*{estimateDate}"/>
+                            <p th:errors="*{estimateDate}" class="text-danger"
+                               th:if="${#fields.errors('estimateDate')}"></p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Real Time</label>
+                            <input type="text" id="realTime" name="realTime" class="form-control"
+                                   placeholder="Enter name realTime" th:field="*{realTime}"/>
+                            <p th:errors="*{realTime}" class="text-danger" th:if="${#fields.errors('realTime')}"></p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Create Date</label>
+                            <input type="date" id="createDate" name="createDate" class="form-control"
+                                   placeholder="Enter Create Date" th:field="*{createDate}"/>
+                            <p th:errors="*{createDate}" class="text-danger"
+                               th:if="${#fields.errors('createDate')}"></p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Create By</label>
+                            <input type="text" id="createBy" name="createBy" class="form-control"
+                                   placeholder="Enter Create By" th:field="*{createBy}"/>
+                            <p th:errors="*{createBy}" class="text-danger"
+                               th:if="${#fields.errors('createBy')}"></p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Update Date</label>
+                            <input type="date" id="updateDate" name="updateDate" class="form-control"
+                                   placeholder=" Update Date" th:field="*{updateDate}"/>
+                            <p th:errors="*{updateDate}" class="text-danger"
+                               th:if="${#fields.errors('updateDate')}"></p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Update By</label>
+                            <input type="text" id="updateBy" name="updateBy" class="form-control"
+                                   placeholder="Enter Update By" th:field="*{updateBy}"/>
+                            <p th:errors="*{updateBy}" class="text-danger" th:if="${#fields.errors('updateBy')}"></p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

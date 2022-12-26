@@ -17,19 +17,12 @@ import java.util.List;
 @RequestMapping("user")
 @Controller
 public class UserController {
-
     @Autowired
     UserService userService;
-
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @GetMapping("/index")
     public String home() {
         return "index";
@@ -49,14 +42,12 @@ public class UserController {
         modelAndView.addObject("users", userService.findById(id));
         return modelAndView;
     }
-
     @GetMapping("/edit/{id}")
     public ModelAndView showEdit(@PathVariable Long id, Model model) {
         ModelAndView modelAndView = new ModelAndView("editUser");
         modelAndView.addObject("users", userService.findById(id));
         return modelAndView;
     }
-
     @PostMapping("/update/{id}")
     public ModelAndView update(@PathVariable Long id, @ModelAttribute("users") UserRequest user) {
         User service = userService.findById(id);
@@ -68,7 +59,6 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("redirect:/user/list");
         return modelAndView;
     }
-
     @GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable Long id, ModelAndView modelAndView) {
         userService.remove(id);

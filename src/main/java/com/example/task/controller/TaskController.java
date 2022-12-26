@@ -1,8 +1,5 @@
 package com.example.task.controller;
-
 import com.example.task.Entity.Task;
-import com.example.task.Repository.ProjectRepository;
-import com.example.task.Repository.UserRepository;
 import com.example.task.service.ProjectService;
 import com.example.task.service.TaskService;
 import com.example.task.service.UserService;
@@ -10,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 import java.util.List;
 

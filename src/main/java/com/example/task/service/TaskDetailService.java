@@ -1,2 +1,6 @@
-package com.example.task.service;public interface TaskDetailService {
+package com.example.task.service;
+
+import com.example.task.Entity.TaskDetail;
+
+public interface TaskDetailService extends IGeneralService<TaskDetail> {
 }
