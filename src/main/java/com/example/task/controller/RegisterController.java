@@ -16,9 +16,6 @@ import javax.validation.Valid;
 public class RegisterController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {

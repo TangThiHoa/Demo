@@ -1,10 +1,12 @@
 package com.example.task.Entity;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,11 +19,8 @@ public class ScheduleTask {
     private Long id;
     @ManyToOne
     private Task task;
-    @Column(name = "work_hour")
-
-    private Time workHour;
-    @Column(name = "work_date")
-
-    private Date workDate;
+    @Column(name = "time_work")
+    @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime timeWork;
 
 }
