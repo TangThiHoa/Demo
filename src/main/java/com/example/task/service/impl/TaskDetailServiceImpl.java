@@ -1,4 +1,5 @@
 package com.example.task.service.impl;
+
 import com.example.task.Entity.TaskDetail;
 import com.example.task.Repository.TaskDetailRepository;
 import com.example.task.service.TaskDetailService;
@@ -33,4 +34,19 @@ public class TaskDetailServiceImpl implements TaskDetailService {
         detailRepository.deleteById(id);
 
     }
+    @Override
+    public int sumEstimate(Long id) {
+        List<TaskDetail> taskDetails = detailRepository.findByIds(id);
+        int sum = 0;
+        for (TaskDetail item : taskDetails) {
+            sum += item.getEstimateTime();
+        }
+        return sum;
+    }
+
+    @Override
+    public List<TaskDetail> findByIds(Long id) {
+        return detailRepository.findByIds(id);
+    }
+
 }

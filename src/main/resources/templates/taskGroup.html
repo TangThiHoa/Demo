@@ -32,45 +32,23 @@
 </nav>
 <div class="container">
     <div class="row col-md-10">
-        <h2>Manager Task Detail</h2>
+        <h2>Manager Task</h2>
     </div>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
             <th>ID</th>
-            <th> Task Name</th>
-            <th> Link Project</th>
-            <th> Link Task</th>
-            <th> Description</th>
-            <th> Point</th>
-            <th> Note</th>
-            <th> EstimateDate</th>
-            <th> RealTime</th>
-            <th> Create Date</th>
-            <th> Create By</th>
-            <th> Update Date</th>
-            <th> Update By</th>
-            <th> Action </th>
+            <th> Task By User</th>
+            <th> Task of Project</th>
+
+
         </tr>
         </thead>
         <tbody>
-
-        <td th:text="${taskDetail.getId()}"></td>
-        <td th:each="taskItem: ${taskDetail.getTask()}" th:text="${taskItem.getName()}"></td>
-        <td th:text="${taskDetail.getLinkProject()}"></td>
-        <td th:text="${taskDetail.getLinkTask()}"></td>
-        <td th:text="${taskDetail.getDescription()}"></td>
-        <td th:text="${taskDetail.getPoint()}"></td>
-        <td th:text="${taskDetail.getNote()}"></td>
-        <td th:text="${taskDetail.getEstimateTime()}"></td>
-        <td th:text="${taskDetail.getEstimateTime()}"></td>
-        <td th:text="${taskDetail.getCreateDate()}"></td>
-        <td th:text="${taskDetail.getCreateBy()}"></td>
-        <td th:text="${taskDetail.getUpdateDate()}"></td>
-        <td th:text="${taskDetail.getUpdateBy()}"></td>
-        <td><a th:href="@{/taskDetail/listTask/{id}(id=${id})}">Detail</a></td>
-
-
+        <tr th:each="item: ${listTaskGroup}">
+            <td th:text="${item.getId()}"></td>
+            <td th:text="${item.getUser().getUsername()}"></td>
+            <td th:text="${item.getProject().getProjectName()}"></td>
         </tr>
         </tbody>
     </table>

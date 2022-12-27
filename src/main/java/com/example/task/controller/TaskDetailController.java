@@ -42,8 +42,8 @@ public class TaskDetailController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detailTask(@PathVariable Long id, Model model){
-        model.addAttribute("taskDetail",taskDetailService.findById(id));
+    public String detailTask(@PathVariable Long id, Model model) {
+        model.addAttribute("taskDetail", taskDetailService.findById(id));
         return "taskDetailFull";
     }
 
@@ -56,14 +56,14 @@ public class TaskDetailController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editForm(@PathVariable Long id, Model model){
-        model.addAttribute("updateTaskDetail",taskDetailService.findById(id));
-        model.addAttribute("task",taskDetailService.findAll());
+    public String editForm(@PathVariable Long id, Model model) {
+        model.addAttribute("updateTaskDetail", taskDetailService.findById(id));
+        model.addAttribute("task", taskDetailService.findAll());
         return "editTaskDetail";
     }
 
     @PostMapping("/list/{id}")
-    public String updateTaskDetail(@ModelAttribute("updateTaskDetail") TaskDetail taskDetail, @PathVariable Long id, Model model){
+    public String updateTaskDetail(@ModelAttribute("updateTaskDetail") TaskDetail taskDetail, @PathVariable Long id, Model model) {
         TaskDetail updateTaskDetail = taskDetailService.findById(id);
         updateTaskDetail.setTask(taskDetail.getTask());
         updateTaskDetail.setLinkProject(taskDetail.getLinkProject());
@@ -71,7 +71,7 @@ public class TaskDetailController {
         updateTaskDetail.setDescription(taskDetail.getDescription());
         updateTaskDetail.setNote(taskDetail.getNote());
         updateTaskDetail.setPoint(taskDetail.getPoint());
-        updateTaskDetail.setEstimateDate(taskDetail.getEstimateDate());
+        updateTaskDetail.setEstimateTime(taskDetail.getEstimateTime());
         updateTaskDetail.setRealTime(taskDetail.getRealTime());
         updateTaskDetail.setCreateDate(taskDetail.getCreateDate());
         updateTaskDetail.setCreateBy(taskDetail.getCreateBy());
@@ -79,7 +79,18 @@ public class TaskDetailController {
         updateTaskDetail.setUpdateDate(taskDetail.getUpdateDate());
         taskDetailService.save(updateTaskDetail);
         List<TaskDetail> taskDetails = taskDetailService.findAll();
-        model.addAttribute("listTaskDetail",taskDetails);
+        model.addAttribute("listTaskDetail", taskDetails);
         return "/listTaskDetail";
     }
+
+    @GetMapping("/listTask/{id}")
+    public String listTask(@PathVariable Long id, Model model){
+        model.addAttribute("sum",taskDetailService.sumEstimate(id));
+        model.addAttribute("listTaskId",taskDetailService.findByIds(id));
+        return "listTaskGroup";
+
+    }
+
+
+
 }

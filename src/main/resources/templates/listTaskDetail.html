@@ -24,7 +24,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/add}">Add Task</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/add}">Add Task Detail</a>
                 </li>
             </ul>
         </div>
@@ -64,8 +64,8 @@
             <td th:text="${item.getDescription()}"></td>
             <td th:text="${item.getPoint()}"></td>
             <td th:text="${item.getNote()}"></td>
-            <td th:text="${item.getEstimateDate()}"></td>
-            <td th:text="${item.getEstimateDate()}"></td>
+            <td th:text="${item.getEstimateTime()}"></td>
+            <td th:text="${item.getEstimateTime()}"></td>
             <td th:text="${item.getCreateDate()}"></td>
             <td th:text="${item.getCreateBy()}"></td>
             <td th:text="${item.getUpdateDate()}"></td>

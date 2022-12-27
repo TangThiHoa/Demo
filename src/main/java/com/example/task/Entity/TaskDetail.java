@@ -19,8 +19,8 @@ public class TaskDetail {
 
     @Column(name = "link_project")
     private String linkProject;
-    @Column(name = "link_task")
 
+    @Column(name = "link_task")
     private String linkTask;
 
     private String description;
@@ -28,24 +28,17 @@ public class TaskDetail {
     private String note;
 
     private String point;
-    @Column(name = "estimate_date")
-
-    private String estimateDate;
+    @Column(name = "estimate_time")
+    private int estimateTime;
     @Column(name = "real_time")
-
     private String realTime;
     @Column(name = "create_date")
-
     private Date createDate;
     @Column(name = "create_by")
-
     private String createBy;
     @Column(name = "update_date")
-
     private Date updateDate;
     @Column(name = "update_by")
-
     private String updateBy;
-
 
 }

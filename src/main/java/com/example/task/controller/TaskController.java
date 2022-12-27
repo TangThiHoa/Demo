@@ -1,4 +1,5 @@
 package com.example.task.controller;
+
 import com.example.task.Entity.Task;
 import com.example.task.service.ProjectService;
 import com.example.task.service.TaskService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -76,6 +78,17 @@ public class TaskController {
         List<Task> tasks = taskService.findAll();
         model.addAttribute("tasks", tasks);
         return "/listTask";
+    }
+
+    @GetMapping("/listTask/{id}")
+    public String listTask(@PathVariable Long id, Model model) {
+        model.addAttribute("listTaskGroup", taskService.findByTaskId(id));
+        return "taskGroup";
+    }
+    @GetMapping("/listProject/{id}")
+    public String listProject(@PathVariable Long id, Model model) {
+        model.addAttribute("projects", taskService.findByProjectId(id));
+        return "projectGroup";
     }
 
 

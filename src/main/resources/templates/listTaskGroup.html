@@ -24,7 +24,7 @@
           <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/task/list}"> Manager Task </a>
+          <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/add}">Add Task</a>
         </li>
       </ul>
     </div>
@@ -32,26 +32,31 @@
 </nav>
 <div class="container">
   <div class="row col-md-10">
-    <h2>UserDetail</h2>
+    <h2>Manager Task Detail</h2>
   </div>
   <table class="table table-bordered table-hover">
     <thead class="table-dark">
     <tr>
       <th>ID</th>
       <th> Task Name</th>
-      <th> Task By User</th>
-      <th> Task of Project</th>
-      <th> Action</th>
+      <th> Link Project</th>
+      <th> Link Task</th>
+      <th> Note</th>
+      <th> Estimate Time</th>
+      <th> Sum Estimate</th>
+
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td th:text="${tasks.id}"></td>
-      <td th:text="${tasks.name}"></td>
-      <td th:text="${tasks.user.getUsername()}"></td>
-      <td th:text="${tasks.project.getProjectName()}"></td>
-      <td><a th:href="@{/task/listTask/{id}(id=${id})}">Detail</a></td>
-
+    <tr th:each="item : ${listTaskId}">
+      <td th:text="${item.getId()}"></td>
+      <td th:each="taskItem: ${item.getTask()}" th:text="${taskItem.getName()}"></td>
+      <td th:text="${item.getLinkProject()}"></td>
+      <td th:text="${item.getLinkTask()}"></td>
+      <td th:text="${item.getNote()}"></td>
+      <td th:text="${item.getEstimateTime()}"></td>
+      <td th:text="${sum}"></td>
+<!--      <td th:text="${sum.getInteger(listTaskId)}"></td>-->
     </tr>
     </tbody>
   </table>

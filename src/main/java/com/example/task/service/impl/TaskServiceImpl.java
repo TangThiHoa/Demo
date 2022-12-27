@@ -32,4 +32,14 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.deleteById(id);
 
     }
+
+    @Override
+    public List<Task> findByTaskId(Long id) {
+        return taskRepository.findByTaskId(id);
+    }
+
+    @Override
+    public List<Task> findByProjectId(Long id) {
+        return taskRepository.findByProjectId(id);
+    }
 }
