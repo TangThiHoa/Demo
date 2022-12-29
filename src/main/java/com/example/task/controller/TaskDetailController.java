@@ -79,13 +79,7 @@ public class TaskDetailController {
         return "/listTaskDetail";
     }
 
-    @GetMapping("/listTask/{id}")
-    public String listTask(@PathVariable Long id, Model model){
-        model.addAttribute("sum",taskDetailService.sumEstimate(id));
-        model.addAttribute("listTaskId",taskDetailService.findByIds(id));
-        return "listTaskGroup";
 
-    }
 
     @GetMapping("/detail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {

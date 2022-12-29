@@ -50,6 +50,8 @@
             <th> Update By</th>
             <th> Estimate Time</th>
             <th> Sum Estimate</th>
+            <th> Action</th>
+            <th> Action</th>
 
         </tr>
         </thead>
@@ -68,6 +70,8 @@
             <td th:text="${item.getUpdateBy()}"></td>
             <td th:text="${item.getEstimateTime()}"></td>
             <td th:text="${sum}"></td>
+            <td><a th:href="@{/taskDetail/edit/{id}(id=${item.getId()})}">Edit</a></td>
+            <td><a th:href="@{/taskDetail/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>

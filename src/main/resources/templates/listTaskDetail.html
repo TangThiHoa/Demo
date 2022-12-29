@@ -42,10 +42,8 @@
             <th> Link Project</th>
             <th> Link Task</th>
             <th> Description</th>
-            <th> EstimateDate</th>
             <th> Action</th>
-            <th> Action</th>
-            <th> Action</th>
+
         </tr>
         </thead>
         <tbody>
@@ -55,10 +53,8 @@
             <td th:text="${item.getLinkProject()}"></td>
             <td th:text="${item.getLinkTask()}"></td>
             <td th:text="${item.getDescription()}"></td>
-            <td th:text="${item.getEstimateTime()}"></td>
             <td><a th:href="@{/taskDetail/detail/{id}(id=${item.getId()})}">Detail</a></td>
-            <td><a th:href="@{/taskDetail/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/taskDetail/delete/{id}(id=${item.getId()})}">Delete</a></td>
+
 
         </tr>
         </tbody>
