@@ -1,5 +1,4 @@
 package com.example.task.controller;
-
 import com.example.task.Entity.Project;
 import com.example.task.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -68,7 +66,6 @@ public class ProjectController {
         return modelAndView;
 
     }
-
     @GetMapping("/detail/{id}")
     public ModelAndView detailProject(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("projectDetail");

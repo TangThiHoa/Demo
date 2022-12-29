@@ -1,5 +1,4 @@
 package com.example.task.controller;
-
 import com.example.task.Entity.TaskDetail;
 import com.example.task.service.TaskDetailService;
 import com.example.task.service.TaskService;
@@ -47,8 +46,8 @@ public class TaskDetailController {
     public String deleteTaskDetail(@PathVariable Long id, Model model) {
         taskDetailService.remove(id);
         List<TaskDetail> taskDetails = taskDetailService.findAll();
-        model.addAttribute("listTaskDetail", taskDetails);
-        return "/listTaskDetail";
+        model.addAttribute("listTaskId", taskDetails);
+        return "/taskDetailFull";
     }
 
     @GetMapping("/edit/{id}")
@@ -75,15 +74,11 @@ public class TaskDetailController {
         updateTaskDetail.setUpdateDate(taskDetail.getUpdateDate());
         taskDetailService.save(updateTaskDetail);
         List<TaskDetail> taskDetails = taskDetailService.findAll();
-        model.addAttribute("listTaskDetail", taskDetails);
-        return "/listTaskDetail";
+        model.addAttribute("listTaskId", taskDetails);
+        return "taskDetailFull";
     }
-
-
-
     @GetMapping("/detail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
-//        model.addAttribute("taskDetail", taskDetailService.findById(id));
         model.addAttribute("sum",taskDetailService.sumEstimate(id));
         model.addAttribute("listTaskId",taskDetailService.findByIds(id));
         return "taskDetailFull";

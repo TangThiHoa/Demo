@@ -3,7 +3,6 @@ import com.example.task.Entity.User;
 import com.example.task.request.UserRequest;
 import com.example.task.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,11 +29,11 @@ public class RegisterController {
         User existingUser = userService.findUserByEmail(userRequest.getEmail());
 
         if (existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()) {
-            result.rejectValue("email", null,
+            result.rejectValue("email", "null",
                     "There is already an account registered with the same email");
         }
         if (!userService.isCorrectConfirmPassword(userRequest)) {
-            result.rejectValue("confirmPassword", null,
+            result.rejectValue("confirmPassword", "null",
                     "Confirm Password invalid");
         }
 

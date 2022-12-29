@@ -90,6 +90,4 @@ public class TaskController {
         model.addAttribute("projects", taskService.findByProjectId(id));
         return "projectGroup";
     }
-
-
 }

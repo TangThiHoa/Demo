@@ -19,20 +19,16 @@ import javax.validation.Valid;
 public class LoginController {
     @Autowired
     UserService userService;
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private AuthenticationManager authenticationManager;
-
 
     @GetMapping("/login")
     public String login(Model model, @ModelAttribute UserLoginRequest user) {
         model.addAttribute("userLogin", user);
         return "/login";
     }
-
     @GetMapping("/user")
     public String users(Model model, @Valid @ModelAttribute("userLogin") UserLoginRequest user) {
         model.addAttribute("userLogin", user);
