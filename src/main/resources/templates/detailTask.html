@@ -24,7 +24,13 @@
           <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/task/list}"> Manager Task </a>
+          <a class="nav-link active" aria-current="page" th:href="@{/project/list}">Manager Project</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/task/list}">Manager Task </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/list}">Manager Task Detail </a>
         </li>
       </ul>
     </div>
@@ -41,7 +47,6 @@
       <th> Task Name</th>
       <th> Task By User</th>
       <th> Task of Project</th>
-      <th> Action</th>
     </tr>
     </thead>
     <tbody>
@@ -50,7 +55,6 @@
       <td th:text="${tasks.name}"></td>
       <td th:text="${tasks.user.getUsername()}"></td>
       <td th:text="${tasks.project.getProjectName()}"></td>
-      <td><a th:href="@{/task/listTask/{id}(id=${id})}">Detail</a></td>
 
     </tr>
     </tbody>

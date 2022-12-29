@@ -24,6 +24,9 @@
           <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/project/list}">Manager Project</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link active" aria-current="page" th:href="@{/task/list}">Manager Task </a>
         </li>
         <li class="nav-item">
@@ -33,13 +36,14 @@
           <a class="nav-link active" aria-current="page" th:href="@{/scheduleTask/list}">Schedule Task </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/project/add}">Add Project</a>
+          <a class="nav-link active" aria-current="page" th:href="@{/project/add}">Add Project </a>
         </li>
+
       </ul>
     </div>
   </div>
 </nav>
-<div class="container">
+<div class="container" style=" max-width: 16890px">
   <div class="row col-md-10">
     <h2> Manager Project </h2>
   </div>
@@ -48,7 +52,6 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
-      <th>Description</th>
       <th>Action</th>
       <th>Action</th>
       <th>Action</th>
@@ -59,7 +62,6 @@
     <tr th:each="item,rowStat : ${projects}">
       <td th:text="${item.getId()}"></td>
       <td th:text="${item.getProjectName()}"></td>
-      <td th:text="${item.getDescription()}"></td>
       <td><a th:href="@{/project/detail/{id}(id=${item.getId()})}">Detail</a></td>
       <td><a th:href="@{/project/edit/{id}(id=${item.getId()})}">Edit</a></td>
       <td><a th:href="@{/project/delete/{id}(id=${item.getId()})}">Delete</a></td>

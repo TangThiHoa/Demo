@@ -45,11 +45,11 @@ public class UserController {
     @GetMapping("/edit/{id}")
     public ModelAndView showEdit(@PathVariable Long id, Model model) {
         ModelAndView modelAndView = new ModelAndView("editUser");
-        modelAndView.addObject("users", userService.findById(id));
+        modelAndView.addObject("userEdit", userService.findById(id));
         return modelAndView;
     }
     @PostMapping("/update/{id}")
-    public ModelAndView update(@PathVariable Long id, @ModelAttribute("users") UserRequest user) {
+    public ModelAndView update(@PathVariable Long id, @ModelAttribute("userEdit") UserRequest user) {
         User service = userService.findById(id);
         service.setUsername(user.getUserName());
         service.setPassword(passwordEncoder.encode(user.getPassword()));

@@ -36,7 +36,7 @@
                 <h2 class="text-center">Update user</h2>
             </div>
             <div class="card-body">
-                <form  method="post" role="form" th:action="@{/user/update/{id}(id=${id})}"  th:object="${users}">
+                <form  method="post" role="form" th:action="@{/user/update/{id}(id=${id})}"  th:object="${userEdit}">
                     <div class="form-group mb-3">
                         <label class="form-label">User Name</label>
                         <input class="form-control" id="userName" name="userName" placeholder="Enter user name" th:value="*{username}" type="text"/>
