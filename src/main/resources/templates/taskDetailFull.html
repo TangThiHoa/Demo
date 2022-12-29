@@ -41,36 +41,33 @@
             <th> Task Name</th>
             <th> Link Project</th>
             <th> Link Task</th>
-            <th> Description</th>
-            <th> Point</th>
             <th> Note</th>
-            <th> EstimateDate</th>
+            <th> Point</th>
             <th> RealTime</th>
             <th> Create Date</th>
             <th> Create By</th>
             <th> Update Date</th>
             <th> Update By</th>
-            <th> Action </th>
+            <th> Estimate Time</th>
+            <th> Sum Estimate</th>
+
         </tr>
         </thead>
         <tbody>
-
-        <td th:text="${taskDetail.getId()}"></td>
-        <td th:each="taskItem: ${taskDetail.getTask()}" th:text="${taskItem.getName()}"></td>
-        <td th:text="${taskDetail.getLinkProject()}"></td>
-        <td th:text="${taskDetail.getLinkTask()}"></td>
-        <td th:text="${taskDetail.getDescription()}"></td>
-        <td th:text="${taskDetail.getPoint()}"></td>
-        <td th:text="${taskDetail.getNote()}"></td>
-        <td th:text="${taskDetail.getEstimateTime()}"></td>
-        <td th:text="${taskDetail.getEstimateTime()}"></td>
-        <td th:text="${taskDetail.getCreateDate()}"></td>
-        <td th:text="${taskDetail.getCreateBy()}"></td>
-        <td th:text="${taskDetail.getUpdateDate()}"></td>
-        <td th:text="${taskDetail.getUpdateBy()}"></td>
-        <td><a th:href="@{/taskDetail/listTask/{id}(id=${id})}">Detail</a></td>
-
-
+        <tr th:each="item : ${listTaskId}">
+            <td th:text="${item.getId()}"></td>
+            <td th:each="taskItem: ${item.getTask()}" th:text="${taskItem.getName()}"></td>
+            <td th:text="${item.getLinkProject()}"></td>
+            <td th:text="${item.getLinkTask()}"></td>
+            <td th:text="${item.getNote()}"></td>
+            <td th:text="${item.getPoint()}"></td>
+            <td th:text="${item.getRealTime()}"></td>
+            <td th:text="${item.getRealTime()}"></td>
+            <td th:text="${item.getCreateDate()}"></td>
+            <td th:text="${item.getCreateBy()}"></td>
+            <td th:text="${item.getUpdateBy()}"></td>
+            <td th:text="${item.getEstimateTime()}"></td>
+            <td th:text="${sum}"></td>
         </tr>
         </tbody>
     </table>

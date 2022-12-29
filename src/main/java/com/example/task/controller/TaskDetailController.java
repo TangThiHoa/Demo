@@ -41,11 +41,7 @@ public class TaskDetailController {
         return "listTaskDetail";
     }
 
-    @GetMapping("/detail/{id}")
-    public String detailTask(@PathVariable Long id, Model model) {
-        model.addAttribute("taskDetail", taskDetailService.findById(id));
-        return "taskDetailFull";
-    }
+
 
     @GetMapping("/delete/{id}")
     public String deleteTaskDetail(@PathVariable Long id, Model model) {
@@ -89,6 +85,14 @@ public class TaskDetailController {
         model.addAttribute("listTaskId",taskDetailService.findByIds(id));
         return "listTaskGroup";
 
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detailTask(@PathVariable Long id, Model model) {
+//        model.addAttribute("taskDetail", taskDetailService.findById(id));
+        model.addAttribute("sum",taskDetailService.sumEstimate(id));
+        model.addAttribute("listTaskId",taskDetailService.findByIds(id));
+        return "taskDetailFull";
     }
 
 
