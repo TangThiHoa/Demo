@@ -30,9 +30,9 @@ dependencies {
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.0'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
     implementation 'org.springframework.boot:spring-boot-starter-security:2.7.5'
-
     // https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE'
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.1.2.RELEASE'
+
     // https://mvnrepository.com/artifact/org.webjars/bootstrap
     implementation 'org.webjars:bootstrap:4.3.1'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
