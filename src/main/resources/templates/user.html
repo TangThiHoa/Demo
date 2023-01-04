@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Registration and Login System</title>
@@ -63,7 +63,7 @@
             <td th:text="${item.getEmail()}"></td>
             <td><a th:href="@{/user/detail/{id}(id=${item.getId()})}">Detail</a></td>
             <td><a th:href="@{user/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/user/delete/{id}(id=${item.getId()})}">Delete</a></td>
+            <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>

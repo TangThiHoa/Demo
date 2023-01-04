@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
@@ -18,11 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    //    @Bean(BeanIds.AUTHENTICATION_MANAGER)
-
     @Autowired
     private UserService userService;
-
 
 
     @Override
@@ -41,9 +38,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**", "/home", "/about").permitAll()
+                .antMatchers("/login/**","/register/**","/project/**","/user/**","/task/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
                 .usernameParameter("email")
@@ -52,17 +48,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and().logout().permitAll()
                 .and().exceptionHandling();
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-//                .usernameParameter("email")
-//                .passwordParameter("password")
-//                .defaultSuccessUrl("/")
-//                .failureUrl("/login?error")
-//                .and()
-//                .exceptionHandling()
-//                .accessDeniedPage("/403");
+
     }
 
     @Autowired

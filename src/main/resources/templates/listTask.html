@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:sec="http://www.thymeleaf.org/extrase/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Registration and Login System</title>
@@ -30,7 +30,8 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/task/list}">Manager Task </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/list}">Manager Task Detail </a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/list}">Manager Task
+                        Detail </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/scheduleTask/list}">Schedule Task </a>
@@ -60,14 +61,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item,rowStat : ${tasks}">
+        <tr th:each="item : ${tasks}">
             <td th:text="${item.getId()}"></td>
             <td th:text="${item.getName()}"></td>
             <td th:text="${item.getUser().getUsername()}"></td>
             <td th:text="${item.getProject().getProjectName()}"></td>
             <td><a th:href="@{/task/detail/{id}(id=${item.getId()})}">Detail</a></td>
-            <td><a th:href="@{/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/task/delete/{id}(id=${item.getId()})}">Delete</a></td>
+            <td><a sec:authorize="" th:href="@{/admin/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
+            <td ><a th:href="@{/admin/task/delete/{id}(id=${item.getId()})}" sec:authorize="hasRole('ADMIN')">Delete</a></td>
         </tr>
         </tbody>
     </table>
