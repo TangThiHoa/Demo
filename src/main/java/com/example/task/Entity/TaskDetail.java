@@ -1,28 +1,34 @@
 package com.example.task.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "task_detail")
 public class TaskDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Task task;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "scheduleTask_id", referencedColumnName = "id")
+    private ScheduleTask scheduleTask;
 
     @Column(name = "link_project")
     private String linkProject;
 
     @Column(name = "link_task")
     private String linkTask;
-
+    @Column(name = "description_task")
     private String description;
 
     private String note;

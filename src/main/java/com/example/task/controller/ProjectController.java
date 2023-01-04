@@ -53,8 +53,7 @@ public class ProjectController {
         projectServiceById.setProjectName(project.getProjectName());
         projectServiceById.setDescription(project.getDescription());
         projectService.save(projectServiceById);
-        ModelAndView modelAndView = new ModelAndView("listProject");
-        return modelAndView;
+        return new ModelAndView("listProject");
     }
 
     @GetMapping("/delete/{id}")

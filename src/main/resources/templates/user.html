@@ -40,33 +40,33 @@
         </div>
     </div>
 </nav>
-<div class="container" style=" max-width: 16890px">
-    <div class="row col-md-10">
-        <h2>Manager Users</h2>
-    </div>
-    <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>UserName</th>
-            <th>Email</th>
-            <th>Action</th>
-            <th>Action</th>
-            <th>Action</th>
+<!--<div class="container" style=" max-width: 16890px">-->
+<!--    <div class="row col-md-10">-->
+<!--        <h2>Manager Users</h2>-->
+<!--    </div>-->
+<!--    <table class="table table-bordered table-hover">-->
+<!--        <thead class="table-dark">-->
+<!--        <tr>-->
+<!--            <th>ID</th>-->
+<!--            <th>UserName</th>-->
+<!--            <th>Email</th>-->
+<!--            <th>Action</th>-->
+<!--            <th>Action</th>-->
+<!--            <th>Action</th>-->
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item,rowStat : ${userList}">
-            <td th:text="${item.getId()}"></td>
-            <td th:text="${item.getUsername()}"></td>
-            <td th:text="${item.getEmail()}"></td>
-            <td><a th:href="@{/user/detail/{id}(id=${item.getId()})}">Detail</a></td>
-            <td><a th:href="@{user/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/delete/{id}(id=${item.getId()})}">Delete</a></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="item,rowStat : ${userList}">-->
+<!--            <td th:text="${item.getId()}"></td>-->
+<!--            <td th:text="${item.getUsername()}"></td>-->
+<!--            <td th:text="${item.getEmail()}"></td>-->
+<!--            <td><a th:href="@{/user/detail/{id}(id=${item.getId()})}">Detail</a></td>-->
+<!--            <td><a th:href="@{user/edit/{id}(id=${item.getId()})}">Edit</a></td>-->
+<!--            <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/delete/{id}(id=${item.getId()})}">Delete</a></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
 </body>
 </html>

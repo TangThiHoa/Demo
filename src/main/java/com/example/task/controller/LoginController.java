@@ -34,7 +34,7 @@ public class LoginController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        model.addAttribute("userList", userRepository.findAll());
+//        model.addAttribute("userList", userRepository.findAll());
         return "/user";
     }
 

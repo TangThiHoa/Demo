@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+@RequestMapping("task")
 @Controller
 public class TaskController {
     @Autowired
@@ -20,7 +21,7 @@ public class TaskController {
     private ProjectService projectService;
 
 
-    @GetMapping("admin/add")
+    @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("newTask", new Task());
         model.addAttribute("user", userService.findAll());
@@ -28,7 +29,7 @@ public class TaskController {
         return "addTask";
     }
 
-    @PostMapping("admin/project")
+    @PostMapping("/project")
     public String create(@Valid @ModelAttribute("newTask") Task task, Model model) {
         taskService.save(task);
         List<Task> taskList = taskService.findAll();
@@ -36,20 +37,20 @@ public class TaskController {
         return "/listTask";
     }
 
-    @GetMapping("task/list")
+    @GetMapping("/list")
     public String listTask(Model model) {
         List<Task> taskList = taskService.findAll();
         model.addAttribute("tasks", taskList);
         return "/listTask";
     }
 
-    @GetMapping("task/detail/{id}")
+    @GetMapping("/detail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
         model.addAttribute("tasks", taskService.findById(id));
         return "/detailTask";
     }
 
-    @GetMapping("admin/task/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("updateTask", taskService.findById(id));
         model.addAttribute("user", userService.findAll());
@@ -57,7 +58,7 @@ public class TaskController {
         return "editTask";
     }
 
-    @PostMapping("admin/task/list/{id}")
+    @PostMapping("/list/{id}")
     public String updateTask(@ModelAttribute("updateTask") Task task, @PathVariable Long id, Model model) {
         Task updateTask = taskService.findById(id);
         updateTask.setName(task.getName());
@@ -69,7 +70,7 @@ public class TaskController {
         return "/listTask";
     }
 
-    @GetMapping("admin/task/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteTask(@PathVariable Long id, Model model) {
         taskService.remove(id);
         List<Task> tasks = taskService.findAll();
@@ -77,7 +78,7 @@ public class TaskController {
         return "/listTask";
     }
 
-    @GetMapping("task/listTask/{id}")
+    @GetMapping("/listTask/{id}")
     public String listTask(@PathVariable Long id, Model model) {
         model.addAttribute("listTaskGroup", taskService.findByTaskId(id));
         return "taskGroup";

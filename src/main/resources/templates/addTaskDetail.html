@@ -53,6 +53,15 @@
                                         th:text="${taskItem.getName()}"></option>
                             </select>
                         </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Schedule Task</label>
+                            <select id="scheduleTask" name="scheduleTask" class="custom-select" th:field="*{scheduleTask}">
+                                <option th:each="taskItem: ${scheduleTask}" th:value="${taskItem.getId()}"
+                                        th:text="${taskItem.getTimeWork()}"></option>
+                            </select>
+                        </div>
+
                         <div class="form-group mb-3">
                             <label class="control-label"> Link Project</label>
                             <input type="text" id="linkTask" name="linkTask" class="form-control"

@@ -1,5 +1,6 @@
 package com.example.task.controller;
 import com.example.task.Entity.TaskDetail;
+import com.example.task.service.ScheduleTaskService;
 import com.example.task.service.TaskDetailService;
 import com.example.task.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,14 @@ public class TaskDetailController {
     TaskDetailService taskDetailService;
     @Autowired
     TaskService taskService;
+    @Autowired
+    ScheduleTaskService scheduleTaskService;
 
     @GetMapping("add")
     public String addForm(Model model) {
         model.addAttribute("addTask", new TaskDetail());
         model.addAttribute("task", taskService.findAll());
+        model.addAttribute("scheduleTask", scheduleTaskService.findAll());
         return "addTaskDetail";
     }
 
@@ -33,7 +37,7 @@ public class TaskDetailController {
         return "listTaskDetail";
     }
 
-    @GetMapping("list")
+    @GetMapping("/list")
     public String listTaskDetail(Model model) {
         List<TaskDetail> detailList = taskDetailService.findAll();
         model.addAttribute("listTaskDetail", detailList);
@@ -54,6 +58,8 @@ public class TaskDetailController {
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("updateTaskDetail", taskDetailService.findById(id));
         model.addAttribute("task", taskDetailService.findAll());
+        model.addAttribute("scheduleTask", scheduleTaskService.findAll());
+
         return "editTaskDetail";
     }
 

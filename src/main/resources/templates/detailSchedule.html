@@ -44,13 +44,11 @@
     <thead class="table-dark">
     <tr>
       <th>ID</th>
-      <th> Task Name</th>
-      <th> Work Time</th>
+       <th> Work Time</th>
     </tr>
     </thead>
     <tbody>
       <td th:text="${detailSchedule.getId()}"></td>
-      <td th:each="taskItem: ${detailSchedule.getTask()}" th:text="${taskItem.getName()}"></td>
       <td th:text="${detailSchedule.getTimeWork()}"></td>
 
 

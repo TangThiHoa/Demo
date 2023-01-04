@@ -67,8 +67,8 @@
             <td th:text="${item.getUser().getUsername()}"></td>
             <td th:text="${item.getProject().getProjectName()}"></td>
             <td><a th:href="@{/task/detail/{id}(id=${item.getId()})}">Detail</a></td>
-            <td><a sec:authorize="" th:href="@{/admin/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td ><a th:href="@{/admin/task/delete/{id}(id=${item.getId()})}" sec:authorize="hasRole('ADMIN')">Delete</a></td>
+            <td><a th:href="@{/admin/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
+            <td><a th:href="@{/admin/task/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>

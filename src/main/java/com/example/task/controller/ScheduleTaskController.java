@@ -68,7 +68,6 @@ public class ScheduleTaskController {
     @PostMapping("/list/{id}")
     public String updateSchedule(@ModelAttribute("updateSchedule") ScheduleTask scheduleTask, @PathVariable Long id, Model model) {
         ScheduleTask updateSchedule = scheduleTaskService.findById(id);
-        updateSchedule.setTask(scheduleTask.getTask());
         updateSchedule.setTimeWork(scheduleTask.getTimeWork());
         scheduleTaskService.save(updateSchedule);
         List<ScheduleTask> scheduleTasks = scheduleTaskService.findAll();

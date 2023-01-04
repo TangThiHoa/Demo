@@ -1,14 +1,15 @@
 package com.example.task.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
-@AllArgsConstructor
+@ AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "project")
 public class Project {
@@ -16,9 +17,13 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = " description_project")
     private String description;
     @Column(name = "project_name")
     private String projectName;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy="project")
+    private Set<Task> taskList;
 
 
 }
