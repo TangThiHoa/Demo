@@ -1,4 +1,5 @@
 package com.example.task.service.impl;
+
 import com.example.task.Entity.TaskDetail;
 import com.example.task.Repository.TaskDetailRepository;
 import com.example.task.service.TaskDetailService;
@@ -33,6 +34,7 @@ public class TaskDetailServiceImpl implements TaskDetailService {
         detailRepository.deleteById(id);
 
     }
+
     @Override
     public int sumEstimate(Long id) {
         List<TaskDetail> taskDetails = detailRepository.findByIds(id);
@@ -47,5 +49,21 @@ public class TaskDetailServiceImpl implements TaskDetailService {
     public List<TaskDetail> findByIds(Long id) {
         return detailRepository.findByIds(id);
     }
+
+    @Override
+    public List<TaskDetail> findAllTaskByUserName(String user) {
+        return detailRepository.findAllTaskByUserName(user);
+    }
+
+    @Override
+    public List<TaskDetail> findAllTaskByProjectName(String project) {
+        return detailRepository.findAllTaskByProjectName(project);
+    }
+
+    @Override
+    public List<TaskDetail> findAllTask() {
+        return detailRepository.findAllTask();
+    }
+
 
 }

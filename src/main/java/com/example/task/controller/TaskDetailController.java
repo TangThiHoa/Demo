@@ -1,8 +1,11 @@
 package com.example.task.controller;
+
 import com.example.task.Entity.TaskDetail;
+import com.example.task.request.UserRequestDTO;
 import com.example.task.service.ScheduleTaskService;
 import com.example.task.service.TaskDetailService;
 import com.example.task.service.TaskService;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,11 +42,10 @@ public class TaskDetailController {
 
     @GetMapping("/list")
     public String listTaskDetail(Model model) {
-        List<TaskDetail> detailList = taskDetailService.findAll();
+        List<TaskDetail> detailList = taskDetailService.findAllTask();
         model.addAttribute("listTaskDetail", detailList);
         return "listTaskDetail";
     }
-
 
 
     @GetMapping("/delete/{id}")
@@ -83,13 +85,21 @@ public class TaskDetailController {
         model.addAttribute("listTaskId", taskDetails);
         return "taskDetailFull";
     }
+
     @GetMapping("/detail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
-        model.addAttribute("sum",taskDetailService.sumEstimate(id));
-        model.addAttribute("listTaskId",taskDetailService.findByIds(id));
+        model.addAttribute("sum", taskDetailService.sumEstimate(id));
+        model.addAttribute("listTaskId", taskDetailService.findByIds(id));
         return "taskDetailFull";
     }
 
+
+    @GetMapping("/search")
+    public String search(Model model, @ModelAttribute("userRequestDTO") UserRequestDTO userRequestDTO) {
+        List<TaskDetail> list = taskDetailService.findAllTaskByUserName(userRequestDTO.getFindByUser());
+        model.addAttribute("listTaskDetail", list);
+        return "listTaskDetail";
+    }
 
 
 }

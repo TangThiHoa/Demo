@@ -1,7 +1,9 @@
 package com.example.task.controller;
+import com.example.task.Entity.TaskDetail;
 import com.example.task.Entity.User;
 import com.example.task.Repository.UserRepository;
 import com.example.task.request.UserRequest;
+import com.example.task.service.TaskDetailService;
 import com.example.task.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +25,7 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @GetMapping("/index")
     public String home() {
         return "index";
@@ -67,6 +70,7 @@ public class UserController {
         modelAndView.addObject("userList", users);
         return modelAndView;
     }
+
 
 
 }

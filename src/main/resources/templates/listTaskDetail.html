@@ -12,67 +12,54 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/index}"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/project/list}">Manager Project</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/task/list}">Manager Task </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/list}">Manager Task
-                        Detail </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/scheduleTask/list}">Schedule Task </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/add}">Add Task Detail </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 <div class="container" style=" max-width: 16890px">
     <div class="row col-md-10">
         <h2>Manager Task Detail</h2>
     </div>
+
+    <form th:action="@{/taskDetail/search}" th:object="${userRequestDTO}" method="get">
+        <input type="text" name="username" th:field="*{findByUser}" placeholder="Find task by user" size="50">
+        <button type="submit">Search</button>
+        <button type="submit">Reload</button>
+    </form>
+    <br>
+
     <table class="table table-bordered table-hover">
-        <thead class="table-dark">
+        <thead class="table-success">
         <tr>
             <th>ID</th>
+            <th> Member</th>
+            <th> Project Name</th>
+            <th> Description Project</th>
             <th> Task Name</th>
             <th> Link Project</th>
             <th> Link Task</th>
-            <th> Description</th>
-            <th> Action</th>
-            <th> Action</th>
-            <th> Action</th>
+            <th> Create Date</th>
+            <th> Update Date</th>
+            <th> Estimate Time</th>
+            <th> Description Task</th>
+            <th> Time Work</th>
 
         </tr>
         </thead>
         <tbody>
         <tr th:each="item : ${listTaskDetail}">
             <td th:text="${item.getId()}"></td>
-            <td th:each="taskItem: ${item.getTask()}" th:text="${taskItem.getName()}"></td>
+            <td th:each="item1 : ${item.getTask().getUser()}" th:text="${item1.getUsername()}"></td>
+            <td th:text="${item.getTask().getProject().getProjectName()}"></td>
+            <td th:text="${item.getTask().getProject().getDescription()}"></td>
+            <td th:text="${item.getTask().getName()}"></td>
             <td><a th:href="${item.getLinkProject()}" th:text="${item.getLinkProject()}"></a></td>
             <td><a th:href="${item.getLinkTask()}" th:text="${item.getLinkTask()}"></a></td>
+            <td th:text="${item.getCreateDate()}"></td>
+            <td th:text="${item.getUpdateDate()}"></td>
+            <td th:text="${item.getEstimateTime()}"></td>
             <td th:text="${item.getDescription()}"></td>
-            <td><a th:href="@{/taskDetail/detail/{id}(id=${item.getId()})}">Detail</a></td>
-            <td><a th:href="@{/taskDetail/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/taskDetail/delete/{id}(id=${item.getId()})}">Delete</a></td>
-
+            <td th:text="${item.getScheduleTask().timeWork}"></td>
+            <!--            <td><a th:href="@{/taskDetail/detail/{id}(id=${item.getId()})}">Detail</a></td>-->
+            <!--            <td><a th:href="@{/taskDetail/edit/{id}(id=${item.getId()})}">Edit</a></td>-->
+            <!--            <td><a th:href="@{/taskDetail/delete/{id}(id=${item.getId()})}">Delete</a></td>-->
+        </tr>
         </tr>
         </tbody>
     </table>

@@ -2,22 +2,20 @@ package com.example.task.Entity;
 
 import lombok.*;
 
-import javax.persistence.*;
-import java.sql.Date;
+import javax.persistence.*;;
 import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Getter
 @Setter
-@ToString
-@Entity
 @Table(name = "Task")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = " task_name")
+    @Column(name = "task_name")
     private String name;
     @ManyToOne
     private User user;
