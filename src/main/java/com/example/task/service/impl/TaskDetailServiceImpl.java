@@ -51,8 +51,18 @@ public class TaskDetailServiceImpl implements TaskDetailService {
     }
 
     @Override
+    public List<TaskDetail> findByProjectId(Long id) {
+        return detailRepository.findByProjectId(id);
+    }
+
+    @Override
     public List<TaskDetail> findAllTaskByUserName(String user) {
         return detailRepository.findAllTaskByUserName(user);
+    }
+
+    @Override
+    public List<TaskDetail> findAllTaskByUserId(Long id) {
+        return detailRepository.findAllTaskByUserId(id);
     }
 
     @Override

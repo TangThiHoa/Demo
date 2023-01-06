@@ -16,10 +16,10 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @GetMapping("/list")
+    @GetMapping("/listProject")
     public ModelAndView listProject() {
         List<Project> projects = projectService.findAll();
-        ModelAndView modelAndView = new ModelAndView("/listProject");
+        ModelAndView modelAndView = new ModelAndView("listProject");
         modelAndView.addObject("projects", projects);
         return modelAndView;
     }

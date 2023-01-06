@@ -12,54 +12,53 @@
 
 </head>
 <body>
-
 <div class="container" style=" max-width: 16890px">
     <div class="row col-md-10">
-        <h3></h3>
+        <h2>List Task Of User </h2>
     </div>
-    <h5>Search for tasks</h5>
-    <form th:object="${search}" th:action="@{user/listTaskDetail}" method="get">
-        <input type="text" name="search" id="search" th:value="${search}"/>
-        <input type="submit" value="Search"/>
-        <div th:if="${not #lists.isEmpty(search)}">
-            <h4>List Task Detail</h4>
-            <table class="table table-bordered table-hover">
-                <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th> Member</th>
-                    <th> Project Name</th>
-                    <th> Description Project</th>
-                    <th> Task Name</th>
-                    <th> Link Project</th>
-                    <th> Link Task</th>
-                    <th> Create Date</th>
-                    <th> Update Date</th>
-                    <th> Estimate Time</th>
-                    <th> Description Task</th>
-                    <th> Time Work</th>
+    <br>
+    <table class="table table-bordered table-hover">
+        <thead class="table-success">
+        <tr>
+            <th>ID</th>
+            <th> Task </th>
+            <th> Time work</th>
+            <th> Link Project</th>
+            <th> Link Task</th>
+            <th> Estimate Time</th>
+            <th> Point</th>
+            <th> RealTime</th>
+            <th> Create Date</th>
+            <th> Create By</th>
+            <th> Update Date</th>
+            <th> Update By</th>
+            <th> Note</th>
+            <th> Sum Estimate</th>
 
 
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="item : ${search}">
-                    <td th:text="${item.getId()}"></td>
-                    <td th:each="taskItem: ${item.getTask().getUser()}" th:text="${taskItem.getUserName()} "></td>
-                    <td th:each="taskItem: ${item.getTask().getProject()}" th:text="${taskItem.getProjectName()} "></td>
-                    <td><a th:href="${item.getLinkProject()}" th:text="${item.getLinkProject()}"></a></td>
-                    <td><a th:href="${item.getLinkTask()}" th:text="${item.getLinkTask()}"></a></td>
-                    <td th:text="${item.getCreateDate()}"></td>
-                    <td th:text="${item.getCreateBy()}"></td>
-                    <td th:text="${item.getUpdateBy()}"></td>
-                    <td th:text="${item.getEstimateTime()}"></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${listByUserId}">
+            <td th:text="${item.getId()}"></td>
+            <td th:each="taskItem: ${item.getTask()}" th:text="${taskItem.getName()} "></td>
+            <td th:text="${item.getScheduleTask().timeWork}"></td>
+            <td><a th:href="${item.getLinkProject()}" th:text="${item.getLinkProject()}"></a></td>
+            <td><a th:href="${item.getLinkTask()}" th:text="${item.getLinkTask()}"></a></td>
+            <td th:text="${item.getEstimateTime()}"></td>
+            <td th:text="${item.getDescription()}"></td>
+            <td th:text="${item.getPoint()}"></td>
+            <td th:text="${item.getRealTime()}"></td>
+            <td th:text="${item.getCreateDate()}"></td>
+            <td th:text="${item.getCreateBy()}"></td>
+            <td th:text="${item.getUpdateBy()}"></td>
+            <td th:text="${item.getNote()}"></td>
+            <td th:text="${sum}"></td>
 
-                </tr>
-                </tbody>
-            </table>
+        </tr>
+        </tbody>
+    </table>
 
-        </div>
-    </form>
 </div>
 </body>
 </html>

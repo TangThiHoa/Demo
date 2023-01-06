@@ -1,6 +1,8 @@
 package com.example.task.controller;
+import com.example.task.Entity.Task;
 import com.example.task.Repository.UserRepository;
 import com.example.task.request.UserLoginRequest;
+import com.example.task.service.TaskService;
 import com.example.task.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class LoginController {
@@ -20,6 +23,9 @@ public class LoginController {
     UserService userService;
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    TaskService taskService;
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -34,8 +40,9 @@ public class LoginController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        model.addAttribute("userList", userRepository.findAll());
-        return "/user";
+        List<Task> taskList = taskService.findAll();
+        model.addAttribute("tasks", taskList);
+        return "/listTask";
     }
 
 }

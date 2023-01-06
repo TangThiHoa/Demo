@@ -86,12 +86,26 @@ public class TaskDetailController {
         return "taskDetailFull";
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/listDetail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
-        model.addAttribute("sum", taskDetailService.sumEstimate(id));
         model.addAttribute("listTaskId", taskDetailService.findByIds(id));
         return "taskDetailFull";
     }
+
+    @GetMapping("/listProject/{id}")
+    public String listTaskOfProject(@PathVariable Long id, Model model) {
+        List<TaskDetail> list = taskDetailService.findByIds(id);
+        model.addAttribute("projects", list);
+        return "listProject";
+    }
+
+    @GetMapping("detail/{id}")
+    public String detailProject(@PathVariable Long id, Model model) {
+        model.addAttribute("sum", taskDetailService.sumEstimate(id));
+        model.addAttribute("listByUserId", taskDetailService.findAllTaskByUserId(id));
+        return "newListTaskDetail";
+    }
+
 
 
     @GetMapping("/search")

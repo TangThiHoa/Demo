@@ -11,7 +11,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary text-white">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/index}"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -24,20 +24,16 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/project/list}">Manager Project</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/task/list}">Manager Task </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/list}">Manager Task
-                        Detail </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/scheduleTask/list}">Schedule Task </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/task/add}">Add Task </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/project/add}">Add Project </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/add}">Add TaskDetail </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/scheduleTask/add}">Schedule </a>
                 </li>
             </ul>
         </div>
@@ -45,30 +41,26 @@
 </nav>
 <div class="container" style=" max-width: 16890px">
     <div class="row col-md-10">
-        <h2>Manager Task</h2>
+        <h2>List Task</h2>
     </div>
+    <br>
     <table class="table table-bordered table-hover">
-        <thead class="table-dark">
+        <thead class="table-success">
         <tr>
             <th>ID</th>
-            <th> Task Name</th>
-            <th> Task By User</th>
-            <th> Task of Project</th>
-            <th> Action</th>
-            <th> Action</th>
-            <th> Action</th>
-
+            <th> Member</th>
+            <th> Task</th>
+            <th> Project</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="item : ${tasks}">
             <td th:text="${item.getId()}"></td>
+            <td><a th:href="@{/taskDetail/listDetail/{id}(id=${item.getId()})}"
+                   th:text="${item.getUser().getUsername()}"></a></td>
             <td th:text="${item.getName()}"></td>
-            <td th:text="${item.getUser().getUsername()}"></td>
-            <td th:text="${item.getProject().getProjectName()}"></td>
-            <td><a th:href="@{/task/detail/{id}(id=${item.getId()})}">Detail</a></td>
-            <td><a th:href="@{/admin/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/admin/task/delete/{id}(id=${item.getId()})}">Delete</a></td>
+            <td>
+            <a th:text="${item.getProject().getProjectName()}"></a> </td>
         </tr>
         </tbody>
     </table>

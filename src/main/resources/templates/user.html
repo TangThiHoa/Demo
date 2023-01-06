@@ -11,7 +11,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary text-white ">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/index}"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -24,46 +24,38 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/project/list}">Manager Project</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/task/}">Manager project</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/task/list}">Manager Task </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/list}">Manager Task Detail </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/scheduleTask/list}">Schedule Task </a>
-                </li>
-
             </ul>
         </div>
     </div>
 </nav>
 <div class="container" style=" max-width: 16890px">
+
     <div class="row col-md-10">
-        <h2>Manager Users</h2>
+        <h4>Manager Task</h4>
     </div>
+    <br>
     <table class="table table-bordered table-hover">
-        <thead class="table-dark">
+        <thead class="table-success">
         <tr>
             <th>ID</th>
             <th>UserName</th>
             <th>Email</th>
-            <th>Action</th>
-            <th>Action</th>
-            <th>Action</th>
+<!--            <th>Action</th>-->
+<!--            <th>Action</th>-->
+<!--            <th>Action</th>-->
 
         </tr>
         </thead>
         <tbody>
         <tr th:each="item,rowStat : ${userList}">
             <td th:text="${item.getId()}"></td>
-            <td th:text="${item.getUsername()}"></td>
+            <td><a th:href="@{task/list}" th:text="${item.getUsername()}"></a></td>
             <td th:text="${item.getEmail()}"></td>
-            <td><a th:href="@{/detail/{id}(id=${item.getId()})}">Detail</a></td>
-            <td><a th:href="@{user/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/admin/delete/{id}(id=${item.getId()})}">Delete</a></td>
+<!--            <td><a th:href="@{/detail/{id}(id=${item.getId()})}">Detail</a></td>-->
+<!--            <td><a th:href="@{user/edit/{id}(id=${item.getId()})}">Edit</a></td>-->
+<!--            <td><a th:href="@{/admin/delete/{id}(id=${item.getId()})}">Delete</a></td>-->
         </tr>
         </tbody>
     </table>
