@@ -14,33 +14,23 @@
 
 <div class="container" style=" max-width: 16890px">
   <div class="row col-md-10">
-    <h2> Manager Project </h2>
+    <h2> List Project </h2>
   </div>
   <table class="table table-bordered table-hover">
     <thead class="table-success">
     <tr>
       <th>ID</th>
-      <th> Task Name</th>
-      <th> Link Project</th>
-      <th> Link Task</th>
-      <th> Create Date</th>
-      <th> Update Date</th>
-      <th> Estimate Time</th>
-<!--      <th>Action</th>-->
-<!--      <th>Action</th>-->
-<!--      <th>Action</th>-->
-
+      <th> Name</th>
+      <th> Description</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="item,rowStat : ${projects}">
+    <tr th:each="item : ${projectList}">
       <td th:text="${item.getId()}"></td>
-      <td th:text="${item.getTask().getName()}"></td>
-      <td th:text="${item.getLinkProject()}"></td>
-      <td th:text="${item.getLinkTask()}"></td>
-      <td th:text="${item.getCreateDate()}"></td>
-      <td th:text="${item.getUpdateDate()}"></td>
-      <td th:text="${item.getEstimateTime()}"></td>
+      <td th:text="${item.getProjectName()}"></td>
+      <td th:text="${item.getDescription()}"></td>
+
+
 
 <!--      <td><a th:href="@{/project/detail/{id}(id=${item.getId()})}">Detail</a></td>-->
 <!--      <td><a th:href="@{/project/edit/{id}(id=${item.getId()})}">Edit</a></td>-->

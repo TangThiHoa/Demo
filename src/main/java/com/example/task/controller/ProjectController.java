@@ -17,25 +17,23 @@ public class ProjectController {
     private ProjectService projectService;
 
     @GetMapping("/listProject")
-    public ModelAndView listProject() {
+    public String listProject(Model model) {
         List<Project> projects = projectService.findAll();
-        ModelAndView modelAndView = new ModelAndView("listProject");
-        modelAndView.addObject("projects", projects);
-        return modelAndView;
+        model.addAttribute("projectList", projects);
+        return "/listProject";
     }
 
     @GetMapping("/add")
-    public ModelAndView addFormProject() {
-        ModelAndView modelAndView = new ModelAndView("addProject");
-        modelAndView.addObject("project", new Project());
-        return modelAndView;
+    public String addFormProject(Model model) {
+        model.addAttribute("project", new Project());
+        return "addProject";
     }
 
     @PostMapping("/create")
     public String saveProject(@Valid @ModelAttribute("project") Project project, Model model) {
         projectService.save(project);
         model.addAttribute("project", new Project());
-        model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("projectList", projectService.findAll());
         return "listProject";
     }
 

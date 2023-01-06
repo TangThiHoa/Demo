@@ -12,17 +12,45 @@
 
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary text-white">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/task/add}">Task </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/project/add}">Project </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/add}">TaskDetail </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/scheduleTask/add}">Schedule </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container" style=" max-width: 16890px">
     <div class="row col-md-10">
         <h2>Manager Task Detail</h2>
     </div>
 
-    <form th:action="@{/taskDetail/search}" th:object="${userRequestDTO}" method="get">
-        <input type="text" name="username" th:field="*{findByUser}" placeholder="Find task by user" size="50">
-        <button type="submit">Search</button>
-        <button type="submit">Reload</button>
-    </form>
-    <br>
+<!--    <form th:action="@{/taskDetail/search}" th:object="${userRequestDTO}" method="get">-->
+<!--        <input type="text" name="username" th:field="*{findByUser}" placeholder="Find task by user" size="50">-->
+<!--        <button type="submit">Search</button>-->
+<!--        <button type="submit">Reload</button>-->
+<!--    </form>-->
+<!--    <br>-->
 
     <table class="table table-bordered table-hover">
         <thead class="table-success">

@@ -35,7 +35,7 @@ public class TaskDetailController {
     @PostMapping("/newList")
     public String saveTaskDetail(@Valid @ModelAttribute TaskDetail taskDetail, Model model) {
         taskDetailService.save(taskDetail);
-        List<TaskDetail> details = taskDetailService.findAll();
+        List<TaskDetail> details = taskDetailService.findAllTask();
         model.addAttribute("listTaskDetail", details);
         return "listTaskDetail";
     }
@@ -92,13 +92,6 @@ public class TaskDetailController {
         return "taskDetailFull";
     }
 
-    @GetMapping("/listProject/{id}")
-    public String listTaskOfProject(@PathVariable Long id, Model model) {
-        List<TaskDetail> list = taskDetailService.findByIds(id);
-        model.addAttribute("projects", list);
-        return "listProject";
-    }
-
     @GetMapping("detail/{id}")
     public String detailProject(@PathVariable Long id, Model model) {
         model.addAttribute("sum", taskDetailService.sumEstimate(id));
@@ -108,12 +101,12 @@ public class TaskDetailController {
 
 
 
-    @GetMapping("/search")
-    public String search(Model model, @ModelAttribute("userRequestDTO") UserRequestDTO userRequestDTO) {
-        List<TaskDetail> list = taskDetailService.findAllTaskByUserName(userRequestDTO.getFindByUser());
-        model.addAttribute("listTaskDetail", list);
-        return "listTaskDetail";
-    }
+//    @GetMapping("/search")
+//    public String search(Model model, @ModelAttribute("userRequestDTO") UserRequestDTO userRequestDTO) {
+//        List<TaskDetail> list = taskDetailService.findAllTaskByUserName(userRequestDTO.getFindByUser());
+//        model.addAttribute("listTaskDetail", list);
+//        return "listTaskDetail";
+//    }
 
 
 }
