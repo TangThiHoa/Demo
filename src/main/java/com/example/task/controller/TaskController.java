@@ -3,10 +3,12 @@ import com.example.task.Entity.Task;
 import com.example.task.service.ProjectService;
 import com.example.task.service.TaskService;
 import com.example.task.service.UserService;
+import com.example.task.service.impl.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -19,6 +21,8 @@ public class TaskController {
     private UserService userService;
     @Autowired
     private ProjectService projectService;
+
+
 
 
     @GetMapping("/add")
@@ -70,18 +74,19 @@ public class TaskController {
         return "/listTask";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteTask(@PathVariable Long id, Model model) {
-        taskService.remove(id);
-        List<Task> tasks = taskService.findAll();
-        model.addAttribute("tasks", tasks);
-        return "/listTask";
-    }
+//    @GetMapping("/delete/{id}")
+//    public String deleteTask(@PathVariable Long id, Model model) {
+//        taskService.remove(id);
+//        List<Task> tasks = taskService.findAll();
+//        model.addAttribute("tasks", tasks);
+//        return "/listTask";
+//    }
 
     @GetMapping("/listTask/{id}")
     public String listTask(@PathVariable Long id, Model model) {
         model.addAttribute("listTaskGroup", taskService.findByTaskId(id));
         return "taskGroup";
     }
+
 
 }

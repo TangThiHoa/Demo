@@ -51,6 +51,8 @@
             <th> Member</th>
             <th> Task</th>
             <th> Project</th>
+            <th> Action</th>
+            <th> Action</th>
         </tr>
         </thead>
         <tbody>
@@ -60,8 +62,12 @@
                    th:text="${item.getUser().getUsername()}"></a></td>
             <td th:text="${item.getName()}"></td>
             <td>
-            <a th:text="${item.getProject().getProjectName()}"></a> </td>
+                <a th:text="${item.getProject().getProjectName()}"></a></td>
+            <td><a th:href="@{/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
+
         </tr>
+
+
         </tbody>
     </table>
 </div>

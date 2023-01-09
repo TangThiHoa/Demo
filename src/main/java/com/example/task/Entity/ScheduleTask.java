@@ -17,10 +17,11 @@ public class ScheduleTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "scheduleTask")
-    private TaskDetail taskDetail;
     @Column(name = "time_work")
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime timeWork;
+
+    @Column(name = "task_id")
+    private long taskId;
 
 }

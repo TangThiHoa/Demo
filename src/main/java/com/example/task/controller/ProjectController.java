@@ -1,11 +1,16 @@
 package com.example.task.controller;
+
 import com.example.task.Entity.Project;
+import com.example.task.Entity.Task;
 import com.example.task.service.ProjectService;
+import com.example.task.service.TaskService;
+import com.example.task.service.impl.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -15,6 +20,12 @@ public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private ProjectServiceImpl projectServiceImlp;
+    @Autowired
+    private TaskService taskService;
+
 
     @GetMapping("/listProject")
     public String listProject(Model model) {
@@ -48,21 +59,23 @@ public class ProjectController {
     @PostMapping("/update/{id}")
     public ModelAndView updateProject(@PathVariable Long id, @ModelAttribute("projects") Project project) {
         Project projectServiceById = projectService.findById(id);
+
         projectServiceById.setProjectName(project.getProjectName());
         projectServiceById.setDescription(project.getDescription());
         projectService.save(projectServiceById);
         return new ModelAndView("listProject");
     }
+//    @GetMapping("/delete/{id}")
+//    public ModelAndView delete(@PathVariable Long id, ModelAndView modelAndView) {
+//        projectService.remove(id);
+//        List<Project> projects = projectService.findAll();
+//        modelAndView = new ModelAndView("/listProject");
+//        modelAndView.addObject("projects", projects);
+//        return modelAndView;
+//
+//    }
 
-    @GetMapping("/delete/{id}")
-    public ModelAndView delete(@PathVariable Long id, ModelAndView modelAndView) {
-        projectService.remove(id);
-        List<Project> projects = projectService.findAll();
-        modelAndView = new ModelAndView("/listProject");
-        modelAndView.addObject("projects", projects);
-        return modelAndView;
-
-    }
+//
     @GetMapping("/detail/{id}")
     public ModelAndView detailProject(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("projectDetail");
@@ -70,5 +83,12 @@ public class ProjectController {
         return modelAndView;
     }
 
+    @GetMapping("/delete/{projectId}")
+    public String deleteProject(@PathVariable Long projectId, Model model) {
+        projectServiceImlp.deleteProjectId(projectId);
+        List<Project> taskList = projectService.findAll();
+        model.addAttribute("projectList", taskList);
+        return "/listProject";
+    }
 
 }

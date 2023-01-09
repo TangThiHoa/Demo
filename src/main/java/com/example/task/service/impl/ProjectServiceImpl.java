@@ -1,9 +1,18 @@
 package com.example.task.service.impl;
+
 import com.example.task.Entity.Project;
+import com.example.task.Entity.Task;
+import com.example.task.Entity.TaskDetail;
 import com.example.task.Repository.ProjectRepository;
+import com.example.task.Repository.ScheduleTaskRepository;
+import com.example.task.Repository.TaskDetailRepository;
+import com.example.task.Repository.TaskRepository;
+import com.example.task.response.ProjectDTO;
 import com.example.task.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,6 +21,15 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     ProjectRepository projectRepository;
+
+    @Autowired
+    TaskRepository taskRepository;
+
+    @Autowired
+    TaskDetailRepository taskDetailRepository;
+
+    @Autowired
+    ScheduleTaskRepository scheduleTaskRepository;
 
     @Override
     public List<Project> findAll() {
@@ -33,6 +51,17 @@ public class ProjectServiceImpl implements ProjectService {
     public void remove(Long id) {
         projectRepository.deleteById(id);
 
+    }
+
+
+    public void deleteProjectId(Long projectId) {
+        List<Task> tasks = taskRepository.findByProjectId(projectId);
+        for (Task task : tasks) {
+            taskDetailRepository.deleteTaskId(task.getId());
+            scheduleTaskRepository.deleteTaskId(task.getId());
+        }
+        taskRepository.deleteProjectId(projectId);
+        projectRepository.deleteById(projectId);
     }
 
 

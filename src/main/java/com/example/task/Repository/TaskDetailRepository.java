@@ -2,9 +2,11 @@ package com.example.task.Repository;
 
 import com.example.task.Entity.TaskDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
             "join task t on project.id = t.project_id " +
             "join task_detail td on t.id = td.task_id " +
             "join schedule_task st on st.id = td.schedule_task_id " +
-            "join user_table ut on ut.id = t.user_id "+
+            "join user_table ut on ut.id = t.user_id " +
             "where ut.id =:id ")
     List<TaskDetail> findAllTaskByUserId(@Param("id") Long id);
 
@@ -32,7 +34,7 @@ public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
             "join task t on project.id = t.project_id " +
             "join task_detail td on t.id = td.task_id " +
             "join schedule_task st on st.id = td.schedule_task_id " +
-            "join user_table ut on ut.id = t.user_id "+
+            "join user_table ut on ut.id = t.user_id " +
             "where ut.username like %:#{#user}% ")
     List<TaskDetail> findAllTaskByUserName(String user);
 
@@ -48,8 +50,14 @@ public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
             "from project\n" +
             "         join task t on project.id = t.project_id\n" +
             "         join task_detail td on t.id = td.task_id\n" +
-            "         join schedule_task st on st.id = td.schedule_task_id" )
+            "         join schedule_task st on st.id = td.schedule_task_id")
     List<TaskDetail> findAllTask();
+
+
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true, value = "DELETE FROM task_detail td where td.task_id =:taskId ")
+    void deleteTaskId(@Param("taskId") Long taskId);
 
 
 }
