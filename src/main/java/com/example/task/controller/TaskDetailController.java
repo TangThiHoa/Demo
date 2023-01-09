@@ -1,11 +1,7 @@
 package com.example.task.controller;
-
 import com.example.task.Entity.TaskDetail;
-import com.example.task.request.UserRequestDTO;
-import com.example.task.service.ScheduleTaskService;
 import com.example.task.service.TaskDetailService;
 import com.example.task.service.TaskService;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -93,10 +89,17 @@ public class TaskDetailController {
 
     @GetMapping("/listDetail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
-        model.addAttribute("listTaskId", taskDetailService.findByIds(id));
+        model.addAttribute("sum", taskDetailService.sumEstimate(id));
+        model.addAttribute("listTaskId", taskDetailService.findAllTaskByTaskId(id));
         return "taskDetailFull";
     }
 
+    @GetMapping("/listTaskOfUser/{id}")
+    public String detailTaskOfUser(@PathVariable Long id, Model model) {
+        model.addAttribute("sum", taskDetailService.sumEstimate(id));
+        model.addAttribute("listTaskId", taskDetailService.findAllTaskByUserId(id));
+        return "taskDetailFull";
+    }
 
 
 

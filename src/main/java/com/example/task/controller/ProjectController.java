@@ -65,17 +65,6 @@ public class ProjectController {
         projectService.save(projectServiceById);
         return new ModelAndView("listProject");
     }
-//    @GetMapping("/delete/{id}")
-//    public ModelAndView delete(@PathVariable Long id, ModelAndView modelAndView) {
-//        projectService.remove(id);
-//        List<Project> projects = projectService.findAll();
-//        modelAndView = new ModelAndView("/listProject");
-//        modelAndView.addObject("projects", projects);
-//        return modelAndView;
-//
-//    }
-
-//
     @GetMapping("/detail/{id}")
     public ModelAndView detailProject(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("projectDetail");

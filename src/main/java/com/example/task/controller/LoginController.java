@@ -1,7 +1,9 @@
 package com.example.task.controller;
+import com.example.task.Entity.Project;
 import com.example.task.Entity.Task;
 import com.example.task.Repository.UserRepository;
 import com.example.task.request.UserLoginRequest;
+import com.example.task.service.ProjectService;
 import com.example.task.service.TaskService;
 import com.example.task.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,9 @@ import java.util.List;
 public class LoginController {
     @Autowired
     UserService userService;
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
-    TaskService taskService;
+    private ProjectService projectService;
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -40,9 +40,9 @@ public class LoginController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        List<Task> taskList = taskService.findAll();
-        model.addAttribute("tasks", taskList);
-        return "/listTask";
+        List<Project> projects = projectService.findAll();
+        model.addAttribute("projectList", projects);
+        return "/listProject";
     }
 
 }

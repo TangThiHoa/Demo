@@ -17,25 +17,41 @@
         <h2>List Task Of User </h2>
     </div>
     <br>
-    <table class="table table-bordered table-hover" >
+    <table class="table table-bordered table-hover">
         <thead class="table-success">
         <tr>
             <th>ID</th>
+            <th> Member</th>
+            <th> Project Name</th>
+            <th> Description Project</th>
             <th> Task Name</th>
+            <th> Link Project</th>
+            <th> Link Task</th>
             <th> Create Date</th>
             <th> Update Date</th>
             <th> Estimate Time</th>
+            <th> Description Task</th>
+            <th> Total estimate</th>
+
 
         </tr>
         </thead>
         <tbody>
         <tr th:each="item : ${listTaskId}">
             <td th:text="${item.getId()}"></td>
-            <td><a th:href="@{/taskDetail/detail/{id}(id=${item.getId()})}" th:each="taskItem: ${item.getTask()}" th:text="${taskItem.getName()}"></a> </td>
+            <td th:each="item1 : ${item.getTask().getUser()}" th:text="${item1.getUsername()}"></td>
+            <td th:text="${item.getTask().getProject().getProjectName()}"></td>
+            <td th:text="${item.getTask().getProject().getDescription()}"></td>
+            <td th:text="${item.getTask().getName()}"></td>
+            <td><a th:href="${item.getLinkProject()}" th:text="${item.getLinkProject()}"></a></td>
+            <td><a th:href="${item.getLinkTask()}" th:text="${item.getLinkTask()}"></a></td>
             <td th:text="${item.getCreateDate()}"></td>
-            <td th:text="${item.getUpdateBy()}"></td>
+            <td th:text="${item.getUpdateDate()}"></td>
             <td th:text="${item.getEstimateTime()}"></td>
-
+            <td th:text="${item.getDescription()}"></td>
+            <td th:text="${sum}"></td>
+            <td><a th:href="@{/taskDetail/edit/{id}(id=${item.getId()})}">Edit</a></td>
+            <td><a th:href="@{/taskDetail/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>

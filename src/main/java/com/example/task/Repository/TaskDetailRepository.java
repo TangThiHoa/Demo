@@ -33,6 +33,14 @@ public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
     @Query(nativeQuery = true, value = "select * from project " +
             "join task t on project.id = t.project_id " +
             "join task_detail td on t.id = td.task_id " +
+            "join schedule_task st on st.id = t.schedule_task_id " +
+            "join user_table ut on ut.id = t.user_id " +
+            "where t.id  =:task_id  ")
+    List<TaskDetail> findAllTaskByTaskId(@Param("task_id") Long id);
+
+    @Query(nativeQuery = true, value = "select * from project " +
+            "join task t on project.id = t.project_id " +
+            "join task_detail td on t.id = td.task_id " +
             "join schedule_task st on st.id = td.schedule_task_id " +
             "join user_table ut on ut.id = t.user_id " +
             "where ut.username like %:#{#user}% ")

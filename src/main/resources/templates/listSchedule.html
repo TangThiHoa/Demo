@@ -57,7 +57,6 @@
     <tr th:each="item : ${listSchedule}">
       <td th:text="${item.getId()}"></td>
       <td th:text="${item.getTimeWork()}"></td>
-      <td><a th:href="@{/scheduleTask/detail/{id}(id=${item.getId()})}">Detail</a></td>
       <td><a th:href="@{/scheduleTask/edit/{id}(id=${item.getId()})}">Edit</a></td>
       <td><a th:href="@{/scheduleTask/delete/{id}(id=${item.getId()})}">Delete</a></td>
 

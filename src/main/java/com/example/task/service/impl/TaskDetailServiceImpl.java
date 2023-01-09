@@ -75,5 +75,10 @@ public class TaskDetailServiceImpl implements TaskDetailService {
         return detailRepository.findAllTask();
     }
 
+    @Override
+    public List<TaskDetail> findAllTaskByTaskId(Long id) {
+        return detailRepository.findAllTaskByTaskId(id);
+    }
+
 
 }

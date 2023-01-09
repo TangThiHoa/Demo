@@ -21,4 +21,6 @@ public interface TaskDetailService extends IGeneralService<TaskDetail> {
     List<TaskDetail> findAllTaskByProjectName(@Param("project") String project);
 
     List<TaskDetail> findAllTask();
+
+    List<TaskDetail> findAllTaskByTaskId(@Param(" task_id ") Long id);
 }

@@ -51,7 +51,7 @@ public class TaskController {
 
     @GetMapping("/detail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
-        model.addAttribute("tasks", taskService.findById(id));
+        model.addAttribute("taskByProjectId", taskService.findByProjectId(id));
         return "/detailTask";
     }
 
@@ -76,19 +76,15 @@ public class TaskController {
         return "/listTask";
     }
 
-//    @GetMapping("/delete/{id}")
-//    public String deleteTask(@PathVariable Long id, Model model) {
-//        taskService.remove(id);
-//        List<Task> tasks = taskService.findAll();
-//        model.addAttribute("tasks", tasks);
-//        return "/listTask";
-//    }
-
-    @GetMapping("/listTask/{id}")
-    public String listTask(@PathVariable Long id, Model model) {
-        model.addAttribute("listTaskGroup", taskService.findByTaskId(id));
-        return "taskGroup";
+    @GetMapping("/delete/{id}")
+    public String deleteTask(@PathVariable Long id, Model model) {
+        taskService.remove(id);
+        List<Task> tasks = taskService.findAll();
+        model.addAttribute("tasks", tasks);
+        return "/listTask";
     }
+
+
 
 
 }

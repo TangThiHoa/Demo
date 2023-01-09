@@ -1,18 +1,14 @@
 package com.example.task.service.impl;
-
 import com.example.task.Entity.Project;
 import com.example.task.Entity.Task;
-import com.example.task.Entity.TaskDetail;
 import com.example.task.Repository.ProjectRepository;
 import com.example.task.Repository.ScheduleTaskRepository;
 import com.example.task.Repository.TaskDetailRepository;
 import com.example.task.Repository.TaskRepository;
-import com.example.task.response.ProjectDTO;
 import com.example.task.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -65,4 +61,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
 
+    @Override
+    public List<Project> findTaskByProjectId(Long projectId) {
+        return projectRepository.findTaskByProjectId(projectId);
+    }
 }
