@@ -21,7 +21,7 @@ public class ScheduleTask {
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime timeWork;
 
-    @Column(name = "task_id")
-    private long taskId;
 
+    @OneToOne(mappedBy = "scheduleTask")
+    private Task taskId;
 }

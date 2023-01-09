@@ -66,7 +66,6 @@
             <th> Update Date</th>
             <th> Estimate Time</th>
             <th> Description Task</th>
-            <th> Time Work</th>
 
         </tr>
         </thead>
@@ -83,7 +82,6 @@
             <td th:text="${item.getUpdateDate()}"></td>
             <td th:text="${item.getEstimateTime()}"></td>
             <td th:text="${item.getDescription()}"></td>
-            <td th:text="${item.getScheduleTask().timeWork}"></td>
             <!--            <td><a th:href="@{/taskDetail/detail/{id}(id=${item.getId()})}">Detail</a></td>-->
             <!--            <td><a th:href="@{/taskDetail/edit/{id}(id=${item.getId()})}">Edit</a></td>-->
             <!--            <td><a th:href="@{/taskDetail/delete/{id}(id=${item.getId()})}">Delete</a></td>-->

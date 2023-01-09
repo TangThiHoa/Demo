@@ -51,7 +51,7 @@
             <th> Member</th>
             <th> Task</th>
             <th> Project</th>
-            <th> Action</th>
+            <th> Schedule</th>
             <th> Action</th>
         </tr>
         </thead>
@@ -61,8 +61,8 @@
             <td><a th:href="@{/taskDetail/listDetail/{id}(id=${item.getId()})}"
                    th:text="${item.getUser().getUsername()}"></a></td>
             <td th:text="${item.getName()}"></td>
-            <td>
-                <a th:text="${item.getProject().getProjectName()}"></a></td>
+            <td><a th:text="${item.getProject().getProjectName()}"></a></td>
+            <td><a th:text="${item.getScheduleTask().getTimeWork()}"></a></td>
             <td><a th:href="@{/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
 
         </tr>

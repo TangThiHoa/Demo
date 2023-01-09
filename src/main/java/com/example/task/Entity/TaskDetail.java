@@ -17,9 +17,7 @@ public class TaskDetail {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Task task;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "scheduleTask_id", referencedColumnName = "id")
-    private ScheduleTask scheduleTask;
+
 
     @Column(name = "link_project")
     private String linkProject;

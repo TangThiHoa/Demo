@@ -21,14 +21,12 @@ public class TaskDetailController {
     TaskDetailService taskDetailService;
     @Autowired
     TaskService taskService;
-    @Autowired
-    ScheduleTaskService scheduleTaskService;
+
 
     @GetMapping("add")
     public String addForm(Model model) {
         model.addAttribute("addTask", new TaskDetail());
         model.addAttribute("task", taskService.findAll());
-        model.addAttribute("scheduleTask", scheduleTaskService.findAll());
         return "addTaskDetail";
     }
 
@@ -47,6 +45,13 @@ public class TaskDetailController {
         return "listTaskDetail";
     }
 
+    @GetMapping("detail/{id}")
+    public String detailProject(@PathVariable Long id, Model model) {
+        model.addAttribute("sum", taskDetailService.sumEstimate(id));
+        model.addAttribute("listByUserId", taskDetailService.findAllTaskByUserId(id));
+        return "newListTaskDetail";
+    }
+
 
     @GetMapping("/delete/{id}")
     public String deleteTaskDetail(@PathVariable Long id, Model model) {
@@ -60,7 +65,7 @@ public class TaskDetailController {
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("updateTaskDetail", taskDetailService.findById(id));
         model.addAttribute("task", taskDetailService.findAll());
-        model.addAttribute("scheduleTask", scheduleTaskService.findAll());
+
 
         return "editTaskDetail";
     }
@@ -92,12 +97,7 @@ public class TaskDetailController {
         return "taskDetailFull";
     }
 
-    @GetMapping("detail/{id}")
-    public String detailProject(@PathVariable Long id, Model model) {
-        model.addAttribute("sum", taskDetailService.sumEstimate(id));
-        model.addAttribute("listByUserId", taskDetailService.findAllTaskByUserId(id));
-        return "newListTaskDetail";
-    }
+
 
 
 

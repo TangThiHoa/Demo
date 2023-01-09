@@ -1,6 +1,7 @@
 package com.example.task.controller;
 import com.example.task.Entity.Task;
 import com.example.task.service.ProjectService;
+import com.example.task.service.ScheduleTaskService;
 import com.example.task.service.TaskService;
 import com.example.task.service.UserService;
 import com.example.task.service.impl.ProjectServiceImpl;
@@ -21,15 +22,15 @@ public class TaskController {
     private UserService userService;
     @Autowired
     private ProjectService projectService;
-
-
-
+    @Autowired
+    ScheduleTaskService scheduleTaskService;
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("newTask", new Task());
         model.addAttribute("user", userService.findAll());
         model.addAttribute("project", projectService.findAll());
+        model.addAttribute("scheduleTask", scheduleTaskService.findAll());
         return "addTask";
     }
 
@@ -59,6 +60,7 @@ public class TaskController {
         model.addAttribute("updateTask", taskService.findById(id));
         model.addAttribute("user", userService.findAll());
         model.addAttribute("project", projectService.findAll());
+        model.addAttribute("scheduleTask", scheduleTaskService.findAll());
         return "editTask";
     }
 
