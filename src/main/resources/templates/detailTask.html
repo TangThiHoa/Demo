@@ -47,6 +47,8 @@
             <th>ID</th>
             <th> Task</th>
             <th> Member</th>
+            <th> Total Time work</th>
+            <th> Action</th>
             <th> Action</th>
             <th> Action</th>
         </tr>
@@ -57,8 +59,10 @@
             <td><a th:href="@{/taskDetail/listDetail/{id}(id=${item.getId()})}"
                    th:text="${item.getName()}"></a></td>
             <td th:text="${item.getUser().getUsername()}"></td>
+            <td th:text="${totalTime}"></td>
             <td><a th:href="@{/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
             <td><a th:href="@{/task/delete/{id}(id=${item.getId()})}">Delete</a></td>
+            <td><a th:href="@{/scheduleTask/detail/{id}(id=${item.getId()})}">Schedule</a></td>
 
         </tr>
         </tbody>

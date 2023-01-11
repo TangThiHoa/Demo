@@ -52,14 +52,12 @@
             <th> Task Name</th>
             <th> Link Project</th>
             <th> Link Task</th>
-            <th> Create Date</th>
-            <th> Update Date</th>
+            <th> Date create detail</th>
+            <th> Update date detail</th>
             <th> Estimate Time</th>
             <th> Description Task</th>
-            <th> Total estimate</th>
             <th> Action</th>
             <th> Action</th>
-
 
         </tr>
         </thead>
@@ -76,7 +74,6 @@
             <td th:text="${item.getUpdateDate()}"></td>
             <td th:text="${item.getEstimateTime()}"></td>
             <td th:text="${item.getDescription()}"></td>
-            <td th:text="${sum}"></td>
             <td><a th:href="@{/taskDetail/edit/{id}(id=${item.getId()})}">Edit</a></td>
             <td><a th:href="@{/taskDetail/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>

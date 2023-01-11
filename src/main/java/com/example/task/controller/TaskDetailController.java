@@ -1,11 +1,15 @@
 package com.example.task.controller;
+
 import com.example.task.Entity.TaskDetail;
+import com.example.task.Repository.TaskDetailRepository;
 import com.example.task.service.TaskDetailService;
 import com.example.task.service.TaskService;
+import com.example.task.service.impl.ScheduleTaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -14,6 +18,12 @@ import java.util.List;
 public class TaskDetailController {
     @Autowired
     TaskDetailService taskDetailService;
+
+    @Autowired
+    TaskDetailRepository taskDetailRepository;
+
+    @Autowired
+    ScheduleTaskServiceImpl scheduleTaskService;
     @Autowired
     TaskService taskService;
 
@@ -28,6 +38,7 @@ public class TaskDetailController {
     @PostMapping("/newList")
     public String saveTaskDetail(@Valid @ModelAttribute TaskDetail taskDetail, Model model) {
         taskDetailService.save(taskDetail);
+        scheduleTaskService.save(taskDetail);
         List<TaskDetail> details = taskDetailService.findAllTask();
         model.addAttribute("listTaskDetails", details);
         return "listTaskDetail";
@@ -87,7 +98,7 @@ public class TaskDetailController {
     @GetMapping("/listDetail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
         model.addAttribute("sum", taskDetailService.sumEstimate(id));
-        model.addAttribute("listTaskId", taskDetailService.findAllTaskByTaskId(id));
+        model.addAttribute("listTaskId", taskDetailRepository.findTaskByTaskId(id));
         return "taskDetailFull";
     }
 

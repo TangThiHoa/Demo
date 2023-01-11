@@ -24,9 +24,6 @@
           <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
         </li>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/list}">Manager Task Detail </a>
-        </li>
       </ul>
     </div>
   </div>
@@ -38,18 +35,14 @@
   <table class="table table-bordered table-hover">
     <thead class="table-success">
     <tr>
-      <th> Task </th>
        <th> Date Work</th>
        <th> Time Work</th>
-       <th> Total Time</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="item : ${detailSchedule}">
-      <td th:text="${item.getTask().getName()}"></td>
       <td th:text="${item.getWorkDate()}"></td>
       <td th:text="${item.getWorkTime()}"></td>
-      <td th:text="${totalTime}"></td>
 
 
     </tr>

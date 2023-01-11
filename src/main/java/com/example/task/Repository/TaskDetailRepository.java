@@ -18,8 +18,12 @@ public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
     @Query(nativeQuery = true, value = "from project join task t on project.id = t.project_id join task_detail td on t.id = td.task_id join schedule_task st on st.id = td.schedule_task_id where project_id =:id")
     List<TaskDetail> findByProjectId(@Param("id") Long id);
 
-    @Query(nativeQuery = true, value = "select sum(estimate_date)as  Total from task_detail where task_id =:taskId")
-    int sumEstimate(@Param("taskId") Long taskId);
+    @Query(nativeQuery = true, value = "select * from project " +
+            "join task t on project.id = t.project_id " +
+            "join user_table ut on ut.id = t.user_id " +
+            "join task_detail td on t.id = td.task_id " +
+            "where t.id =:taskId ")
+    List<TaskDetail> findTaskByTaskId(@Param("taskId") Long id);
 
     @Query(nativeQuery = true, value = "select * from project " +
             "join task t on project.id = t.project_id " +

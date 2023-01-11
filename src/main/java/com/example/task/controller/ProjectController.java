@@ -22,7 +22,7 @@ public class ProjectController {
     private ProjectService projectService;
 
     @Autowired
-    private ProjectServiceImpl projectServiceImlp;
+    private ProjectServiceImpl projectServiceImpl;
 
     @GetMapping("/listProject")
     public String listProject(Model model) {
@@ -71,7 +71,7 @@ public class ProjectController {
 
     @GetMapping("/delete/{projectId}")
     public String deleteProject(@PathVariable Long projectId, Model model) {
-        projectServiceImlp.deleteProjectId(projectId);
+        projectServiceImpl.deleteProjectId(projectId);
         List<Project> taskList = projectService.findAll();
         model.addAttribute("projectList", taskList);
         return "/listProject";

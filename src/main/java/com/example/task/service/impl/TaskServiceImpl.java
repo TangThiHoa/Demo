@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class TaskServiceImpl implements TaskService {
     @Autowired
     TaskRepository taskRepository;
+
     @Override
     public List<Task> findAll() {
         return taskRepository.findAll();
@@ -41,5 +43,15 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> findByProjectId(Long id) {
         return taskRepository.findByProjectId(id);
+    }
+
+
+    public List<Task> findByProjectIdAndTaskId(Long id) {
+        List<Task> tasks = taskRepository.findTaskByTaskId(id);
+        for (Task task : tasks) {
+            taskRepository.findByProjectId(task.getId());
+        }
+        return taskRepository.findByProjectId(id);
+
     }
 }

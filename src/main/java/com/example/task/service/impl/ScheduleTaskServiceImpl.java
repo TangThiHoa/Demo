@@ -1,4 +1,5 @@
 package com.example.task.service.impl;
+
 import com.example.task.Entity.ScheduleTask;
 import com.example.task.Entity.TaskDetail;
 import com.example.task.Repository.ScheduleTaskRepository;
@@ -12,44 +13,53 @@ import java.util.List;
 @Service
 public class ScheduleTaskServiceImpl implements ScheduleTaskService {
     @Autowired
-    ScheduleTaskRepository taskRepository;
+    ScheduleTaskRepository scheduleTaskRepository;
 
     @Autowired
     TaskDetailRepository taskDetailRepository;
 
     @Override
     public List<ScheduleTask> findAll() {
-        return taskRepository.findAll();
+        return scheduleTaskRepository.findAll();
     }
 
     @Override
     public ScheduleTask findById(Long id) {
-        return taskRepository.findById(id).get();
+        return scheduleTaskRepository.findById(id).get();
     }
 
     @Override
     public void save(ScheduleTask scheduleTask) {
-        taskRepository.save(scheduleTask);
+        scheduleTaskRepository.save(scheduleTask);
     }
+
     @Override
     public void remove(Long id) {
-        taskRepository.deleteById(id);
+        scheduleTaskRepository.deleteById(id);
 
     }
 
     @Override
     public int totalTime(Long taskId) {
-        return taskRepository.totalTime(taskId);
+        return scheduleTaskRepository.totalTime(taskId);
     }
 
     @Override
     public List<ScheduleTask> findScheduleTaskByIdTask(Long taskId) {
-        return taskRepository.findScheduleTaskByIdTask(taskId);
+        return scheduleTaskRepository.findScheduleTaskByIdTask(taskId);
     }
 
     @Override
     public List<TaskDetail> findTaskDetailByTaskId(Long taskId) {
-        return taskRepository.findTaskDetailByTaskId(taskId);
+        return scheduleTaskRepository.findTaskDetailByTaskId(taskId);
+    }
+
+    public ScheduleTask save(TaskDetail taskDetail) {
+        ScheduleTask save = new ScheduleTask();
+        save.setTask(taskDetail.getTask());
+        save.setWorkDate(taskDetail.getUpdateDate().toLocalDate());
+        save.setWorkTime(Integer.parseInt(taskDetail.getRealTime()));
+        return scheduleTaskRepository.save(save);
     }
 
 

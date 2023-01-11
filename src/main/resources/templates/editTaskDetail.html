@@ -98,14 +98,14 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label class="control-label"> Create Date</label>
+                            <label class="control-label"> Create Date Detail</label>
                             <input type="date" id="createDate" name="createDate" class="form-control"
                                    placeholder="Enter Create Date" th:field="*{createDate}"/>
                             <p th:errors="*{createDate}" class="text-danger"
                                th:if="${#fields.errors('createDate')}"></p>
                         </div>
                         <div class="form-group mb-3">
-                            <label class="control-label"> Create By</label>
+                            <label class="control-label"> Create By Name</label>
                             <input type="text" id="createBy" name="createBy" class="form-control"
                                    placeholder="Enter Create By" th:field="*{createBy}"/>
                             <p th:errors="*{createBy}" class="text-danger"
@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label class="control-label"> Update Date</label>
+                            <label class="control-label"> Update Date Detail</label>
                             <input type="date" id="updateDate" name="updateDate" class="form-control"
                                    placeholder=" Update Date" th:field="*{updateDate}"/>
                             <p th:errors="*{updateDate}" class="text-danger"
@@ -121,7 +121,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label class="control-label"> Update By</label>
+                            <label class="control-label"> Update By Name </label>
                             <input type="text" id="updateBy" name="updateBy" class="form-control"
                                    placeholder="Enter Update By" th:field="*{updateBy}"/>
                             <p th:errors="*{updateBy}" class="text-danger" th:if="${#fields.errors('updateBy')}"></p>
