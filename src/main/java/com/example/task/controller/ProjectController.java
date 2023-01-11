@@ -23,9 +23,6 @@ public class ProjectController {
 
     @Autowired
     private ProjectServiceImpl projectServiceImlp;
-    @Autowired
-    private TaskService taskService;
-
 
     @GetMapping("/listProject")
     public String listProject(Model model) {
@@ -57,13 +54,13 @@ public class ProjectController {
     }
 
     @PostMapping("/update/{id}")
-    public ModelAndView updateProject(@PathVariable Long id, @ModelAttribute("projects") Project project) {
+    public String updateProject(@PathVariable Long id, @ModelAttribute("projects") Project project, Model model) {
         Project projectServiceById = projectService.findById(id);
-
         projectServiceById.setProjectName(project.getProjectName());
         projectServiceById.setDescription(project.getDescription());
         projectService.save(projectServiceById);
-        return new ModelAndView("listProject");
+        model.addAttribute("projectList", projectService.findAll());
+        return "listProject";
     }
     @GetMapping("/detail/{id}")
     public ModelAndView detailProject(@PathVariable Long id) {

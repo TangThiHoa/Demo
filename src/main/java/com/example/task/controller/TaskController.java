@@ -30,7 +30,6 @@ public class TaskController {
         model.addAttribute("newTask", new Task());
         model.addAttribute("user", userService.findAll());
         model.addAttribute("project", projectService.findAll());
-        model.addAttribute("scheduleTask", scheduleTaskService.findAll());
         return "addTask";
     }
 
@@ -49,40 +48,41 @@ public class TaskController {
         return "/listTask";
     }
 
-    @GetMapping("/detail/{id}")
-    public String detailTask(@PathVariable Long id, Model model) {
-        model.addAttribute("taskByProjectId", taskService.findByProjectId(id));
-        return "/detailTask";
-    }
 
-    @GetMapping("/edit/{id}")
-    public String editForm(@PathVariable Long id, Model model) {
-        model.addAttribute("updateTask", taskService.findById(id));
-        model.addAttribute("user", userService.findAll());
-        model.addAttribute("project", projectService.findAll());
-        model.addAttribute("scheduleTask", scheduleTaskService.findAll());
-        return "editTask";
-    }
 
-    @PostMapping("/list/{id}")
-    public String updateTask(@ModelAttribute("updateTask") Task task, @PathVariable Long id, Model model) {
-        Task updateTask = taskService.findById(id);
-        updateTask.setName(task.getName());
-        updateTask.setUser(task.getUser());
-        updateTask.setProject(task.getProject());
-        taskService.save(updateTask);
-        List<Task> taskList = taskService.findAll();
-        model.addAttribute("tasks", taskList);
-        return "/listTask";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteTask(@PathVariable Long id, Model model) {
-        taskService.remove(id);
-        List<Task> tasks = taskService.findAll();
-        model.addAttribute("tasks", tasks);
-        return "/listTask";
-    }
+//    @GetMapping("/detail/{id}")
+//    public String detailTask(@PathVariable Long id, Model model) {
+//        model.addAttribute("taskByProjectId", taskService.findByProjectId(id));
+//        return "/detailTask";
+//    }
+//
+//    @GetMapping("/edit/{id}")
+//    public String editForm(@PathVariable Long id, Model model) {
+//        model.addAttribute("updateTask", taskService.findById(id));
+//        model.addAttribute("user", userService.findAll());
+//        model.addAttribute("project", projectService.findAll());
+//        return "editTask";
+//    }
+//
+//    @PostMapping("/list/{id}")
+//    public String updateTask(@ModelAttribute("updateTask") Task task, @PathVariable Long id, Model model) {
+//        Task updateTask = taskService.findById(id);
+//        updateTask.setName(task.getName());
+//        updateTask.setUser(task.getUser());
+//        updateTask.setProject(task.getProject());
+//        taskService.save(updateTask);
+//        List<Task> taskList = taskService.findAll();
+//        model.addAttribute("tasks", taskList);
+//        return "/listTask";
+//    }
+//
+//    @GetMapping("/delete/{id}")
+//    public String deleteTask(@PathVariable Long id, Model model) {
+//        taskService.remove(id);
+//        List<Task> tasks = taskService.findAll();
+//        model.addAttribute("tasks", tasks);
+//        return "/listTask";
+//    }
 
 
 

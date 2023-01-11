@@ -4,7 +4,8 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,11 +18,15 @@ public class ScheduleTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "time_work")
+    @Column(name = "work_date")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate workDate;
+
+    @Column(name = "work_time")
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime timeWork;
+    private int workTime;
 
 
-    @OneToOne(mappedBy = "scheduleTask")
-    private Task taskId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Task task;
 }

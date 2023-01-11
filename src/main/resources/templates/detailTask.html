@@ -24,21 +24,18 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/task/add}">Task </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/project/add}">Project </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/add}">TaskDetail </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/scheduleTask/add}">Schedule </a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/task/list}">Task </a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+<br>
+
+<div>
+    <button><a th:href="@{/task/add}"> Add Task </a></button>
+</div>
+<br>
 <div class="container" style=" max-width: 16890px">
     <div class="row col-md-10">
         <h2>List Task</h2>
@@ -50,8 +47,8 @@
             <th>ID</th>
             <th> Task</th>
             <th> Member</th>
-
-            <th> Schedule</th>
+            <th> Action</th>
+            <th> Action</th>
         </tr>
         </thead>
         <tbody>
@@ -59,9 +56,9 @@
             <td th:text="${item.getId()}"></td>
             <td><a th:href="@{/taskDetail/listDetail/{id}(id=${item.getId()})}"
                    th:text="${item.getName()}"></a></td>
-            <td><a th:href="@{/taskDetail/listTaskOfUser/{id}(id=${item.getId()})}"
-                   th:text="${item.getUser().getUsername()}"></a></td>
-            <td><a th:text="${item.getScheduleTask().getTimeWork()}"></a></td>
+            <td th:text="${item.getUser().getUsername()}"></td>
+            <td><a th:href="@{/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
+            <td><a th:href="@{/task/delete/{id}(id=${item.getId()})}">Delete</a></td>
 
         </tr>
         </tbody>

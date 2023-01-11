@@ -18,47 +18,36 @@ public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
     @Query(nativeQuery = true, value = "from project join task t on project.id = t.project_id join task_detail td on t.id = td.task_id join schedule_task st on st.id = td.schedule_task_id where project_id =:id")
     List<TaskDetail> findByProjectId(@Param("id") Long id);
 
-
     @Query(nativeQuery = true, value = "select sum(estimate_date)as  Total from task_detail where task_id =:taskId")
     int sumEstimate(@Param("taskId") Long taskId);
 
     @Query(nativeQuery = true, value = "select * from project " +
             "join task t on project.id = t.project_id " +
-            "join task_detail td on t.id = td.task_id " +
-            "join schedule_task st on st.id = t.schedule_task_id " +
             "join user_table ut on ut.id = t.user_id " +
             "where ut.id =:id ")
     List<TaskDetail> findAllTaskByUserId(@Param("id") Long id);
 
-    @Query(nativeQuery = true, value = "select * from project " +
-            "join task t on project.id = t.project_id " +
-            "join task_detail td on t.id = td.task_id " +
-            "join schedule_task st on st.id = t.schedule_task_id " +
-            "join user_table ut on ut.id = t.user_id " +
-            "where t.id  =:task_id  ")
+    @Query(nativeQuery = true, value = "select * from project join task t on project.id = t.project_id join task_detail td on t.id = td.task_id join schedule_task st on t.id = st.task_id where st.task_id =:task_id  ")
     List<TaskDetail> findAllTaskByTaskId(@Param("task_id") Long id);
 
     @Query(nativeQuery = true, value = "select * from project " +
             "join task t on project.id = t.project_id " +
             "join task_detail td on t.id = td.task_id " +
-            "join schedule_task st on st.id = td.schedule_task_id " +
+            "join schedule_task st on t.id = st.task_id " +
             "join user_table ut on ut.id = t.user_id " +
             "where ut.username like %:#{#user}% ")
     List<TaskDetail> findAllTaskByUserName(String user);
 
-    @Query(nativeQuery = true, value = "select *\n" +
-            "from project\n" +
-            "join task t on project.id = t.project_id\n" +
-            "join task_detail td on t.id = td.task_id\n" +
-            "join schedule_task st on st.id = td.schedule_task_id\n" +
+    @Query(nativeQuery = true, value = "select * " +
+            "from project " +
+            "join task t on project.id = t.project_id " +
+            "join task_detail td on t.id = td.task_id " +
+            "join  schedule_task st on t.id = st.task_id " +
             "where  project.project_name like 'project%'")
     List<TaskDetail> findAllTaskByProjectName(@Param("project") String project);
 
-    @Query(nativeQuery = true, value = "select *\n" +
-            "from project\n" +
-            "         join task t on project.id = t.project_id\n" +
-            "         join task_detail td on t.id = td.task_id\n" +
-            "         join schedule_task st on st.id = td.schedule_task_id")
+    @Query(nativeQuery = true, value = "select * " +
+            "from task_detail join schedule_task st on  task_detail.id = st.id ")
     List<TaskDetail> findAllTask();
 
 

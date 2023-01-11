@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -34,7 +35,7 @@ public class LoginController {
         model.addAttribute("userLogin", user);
         return "/login";
     }
-    @GetMapping("/user")
+    @PostMapping("/user")
     public String users(Model model, @Valid @ModelAttribute("userLogin") UserLoginRequest user) {
         model.addAttribute("userLogin", user);
         Authentication authentication = authenticationManager.authenticate(

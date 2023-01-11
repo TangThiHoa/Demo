@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -30,14 +29,14 @@ public class TaskDetailController {
     public String saveTaskDetail(@Valid @ModelAttribute TaskDetail taskDetail, Model model) {
         taskDetailService.save(taskDetail);
         List<TaskDetail> details = taskDetailService.findAllTask();
-        model.addAttribute("listTaskDetail", details);
+        model.addAttribute("listTaskDetails", details);
         return "listTaskDetail";
     }
 
     @GetMapping("/list")
     public String listTaskDetail(Model model) {
         List<TaskDetail> detailList = taskDetailService.findAllTask();
-        model.addAttribute("listTaskDetail", detailList);
+        model.addAttribute("listTaskDetails", detailList);
         return "listTaskDetail";
     }
 
@@ -61,8 +60,6 @@ public class TaskDetailController {
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("updateTaskDetail", taskDetailService.findById(id));
         model.addAttribute("task", taskDetailService.findAll());
-
-
         return "editTaskDetail";
     }
 
@@ -82,8 +79,8 @@ public class TaskDetailController {
         updateTaskDetail.setUpdateBy(taskDetail.getUpdateBy());
         updateTaskDetail.setUpdateDate(taskDetail.getUpdateDate());
         taskDetailService.save(updateTaskDetail);
-        List<TaskDetail> taskDetails = taskDetailService.findAll();
-        model.addAttribute("listTaskId", taskDetails);
+        List<TaskDetail> detailList = taskDetailService.findAllTask();
+        model.addAttribute("listTaskDetail", detailList);
         return "taskDetailFull";
     }
 
@@ -93,15 +90,6 @@ public class TaskDetailController {
         model.addAttribute("listTaskId", taskDetailService.findAllTaskByTaskId(id));
         return "taskDetailFull";
     }
-
-    @GetMapping("/listTaskOfUser/{id}")
-    public String detailTaskOfUser(@PathVariable Long id, Model model) {
-        model.addAttribute("sum", taskDetailService.sumEstimate(id));
-        model.addAttribute("listTaskId", taskDetailService.findAllTaskByUserId(id));
-        return "taskDetailFull";
-    }
-
-
 
 
 //    @GetMapping("/search")

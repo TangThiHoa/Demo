@@ -23,10 +23,23 @@
                 <div class="card-body">
                     <form method="post" role="form" th:action="@{/scheduleTask/newList}" th:object="${newScheduleTask}">
                         <div class="form-group mb-3">
-                            <label class="control-label"> Time Work</label>
-                            <input type="datetime-local" th:field="*{timeWork}" id="input_data_name"/>
-                            <p th:errors="*{timeWork}" class="text-danger" th:if="${#fields.errors('timeWork')}"></p>
+                            <label class="control-label"> Task</label>
+                            <select id="task" name="task" class="custom-select" th:field="*{task}">
+                                <option th:each="taskItem: ${tasks}" th:value="${taskItem.getId()}"
+                                        th:text="${taskItem.getName()}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Date Work</label>
+                            <input type="date" th:field="*{workDate}"/>
+                            <p th:errors="*{workDate}" class="text-danger" th:if="${#fields.errors('workDate')}"></p>
 
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Time Work</label>
+                            <input type="number" th:field="*{workTime}"/>
+                            <p th:errors="*{workTime}" class="text-danger" th:if="${#fields.errors('workTime')}"></p>
                         </div>
                         <div class="form-group mb-3">
                             <button type="submit" class="btn btn-secondary">Submit</button>

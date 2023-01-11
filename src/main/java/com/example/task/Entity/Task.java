@@ -26,9 +26,11 @@ public class Task {
     @OneToMany(fetch = FetchType.EAGER, mappedBy="task")
     private Set<TaskDetail> taskDetails;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "schedule_task_id", referencedColumnName = "id")
-    private ScheduleTask scheduleTask;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="task")
+    private Set<ScheduleTask> scheduleTasks;
+
+
 
 
 }
