@@ -38,17 +38,17 @@
   <table class="table table-bordered table-hover">
     <thead class="table-success">
     <tr>
-      <th>ID</th>
+      <th> Task </th>
        <th> Date Work</th>
        <th> Time Work</th>
-       <th> Work Time</th>
        <th> Total Time</th>
     </tr>
     </thead>
     <tbody>
-      <td th:text="${detailSchedule.getId()}"></td>
-      <td th:text="${detailSchedule.getWorkTime()}"></td>
-      <td th:text="${detailSchedule.getWorkDate()}"></td>
+    <tr th:each="item : ${detailSchedule}">
+      <td th:text="${item.getTask().getName()}"></td>
+      <td th:text="${item.getWorkDate()}"></td>
+      <td th:text="${item.getWorkTime()}"></td>
       <td th:text="${totalTime}"></td>
 
 

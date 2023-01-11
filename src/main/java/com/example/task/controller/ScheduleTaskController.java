@@ -37,6 +37,7 @@ public class ScheduleTaskController {
     public String listScheduleTask(Model model) {
         List<ScheduleTask> scheduleTasks = scheduleTaskService.findAll();
         model.addAttribute("scheduleList", scheduleTasks);
+
         return "listSchedule";
     }
 
@@ -51,7 +52,7 @@ public class ScheduleTaskController {
 
     @GetMapping("/detail/{id}")
     public String detailSchedule(@PathVariable Long id, Model model) {
-        model.addAttribute("detailSchedule", scheduleTaskService.findById(id));
+        model.addAttribute("detailSchedule", scheduleTaskService.findScheduleTaskByIdTask(id));
         model.addAttribute("totalTime", scheduleTaskService.totalTime(id));
         return "detailSchedule";
 

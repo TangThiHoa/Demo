@@ -1,6 +1,5 @@
 package com.example.task.service.impl;
 import com.example.task.Entity.ScheduleTask;
-import com.example.task.Entity.Task;
 import com.example.task.Entity.TaskDetail;
 import com.example.task.Repository.ScheduleTaskRepository;
 import com.example.task.Repository.TaskDetailRepository;
@@ -41,6 +40,16 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
     @Override
     public int totalTime(Long taskId) {
         return taskRepository.totalTime(taskId);
+    }
+
+    @Override
+    public List<ScheduleTask> findScheduleTaskByIdTask(Long taskId) {
+        return taskRepository.findScheduleTaskByIdTask(taskId);
+    }
+
+    @Override
+    public List<TaskDetail> findTaskDetailByTaskId(Long taskId) {
+        return taskRepository.findTaskDetailByTaskId(taskId);
     }
 
 

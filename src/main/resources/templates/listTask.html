@@ -61,7 +61,7 @@
             </td>
             <td th:text="${item.getName()}"></td>
             <td><a th:text="${item.getProject().getProjectName()}"></a></td>
-            <td><a th:href="@{/task/edit/{id}(id=${item.getId()})}">LIST</a></td>
+            <td><a th:href="@{/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
             <td><a th:href="@{/task/delete/{id}(id=${item.getId()})}">Delete</a></td>
 
         </tr>

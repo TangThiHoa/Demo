@@ -44,8 +44,6 @@
         <tr>
             <th>ID</th>
             <th>Task</th>
-            <th>Date Work</th>
-            <th>Time Work</th>
             <th> Action</th>
             <th> Action</th>
         </tr>
@@ -55,8 +53,6 @@
             <td th:text="${item.getId()}"></td>
             <td><a th:href="@{/scheduleTask/detail/{id}(id=${item.getId()})}"
                    th:each="item1 : ${item.getTask()}" th:text="${item1.getName}" }></a></td>
-            <td th:text="${item.getWorkDate()}"></td>
-            <td th:text="${item.getWorkTime()}"></td>
             <td><a th:href="@{/scheduleTask/edit/{id}(id=${item.getId()})}">Edit</a></td>
             <td><a th:href="@{/scheduleTask/delete/{id}(id=${item.getId()})}">Delete</a></td>
 
