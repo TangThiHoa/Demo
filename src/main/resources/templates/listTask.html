@@ -24,9 +24,6 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/task/list}">Task </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/scheduleTask/list}">Schedule </a>
                 </li>
             </ul>
@@ -50,8 +47,7 @@
             <th> Member</th>
             <th> Task</th>
             <th> Project</th>
-            <th> Action</th>
-            <th> Action</th>
+
         </tr>
         </thead>
         <tbody>
@@ -61,8 +57,6 @@
             </td>
             <td th:text="${item.getName()}"></td>
             <td><a th:text="${item.getProject().getProjectName()}"></a></td>
-            <td><a th:href="@{/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/task/delete/{id}(id=${item.getId()})}">Delete</a></td>
 
         </tr>
 

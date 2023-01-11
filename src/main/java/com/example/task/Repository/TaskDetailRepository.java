@@ -1,5 +1,6 @@
 package com.example.task.Repository;
 
+import com.example.task.Entity.Task;
 import com.example.task.Entity.TaskDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,6 +23,7 @@ public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
             "join task t on project.id = t.project_id " +
             "join user_table ut on ut.id = t.user_id " +
             "join task_detail td on t.id = td.task_id " +
+            "join schedule_task st on t.id = st.task_id " +
             "where t.id =:taskId ")
     List<TaskDetail> findTaskByTaskId(@Param("taskId") Long id);
 
@@ -59,6 +61,9 @@ public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
     @Modifying
     @Query(nativeQuery = true, value = "DELETE FROM task_detail td where td.task_id =:taskId ")
     void deleteTaskId(@Param("taskId") Long taskId);
+
+    @Query(nativeQuery = true, value = "select *from task where task.id =:task_id")
+    List<Task> findByIdTask(@Param("task_id") Long id);
 
 
 }

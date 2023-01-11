@@ -1,18 +1,14 @@
 package com.example.task.controller;
-import com.example.task.Entity.Project;
 import com.example.task.Entity.Task;
-import com.example.task.Repository.TaskRepository;
 import com.example.task.service.ProjectService;
 import com.example.task.service.ScheduleTaskService;
 import com.example.task.service.TaskService;
 import com.example.task.service.UserService;
-import com.example.task.service.impl.ProjectServiceImpl;
 import com.example.task.service.impl.TaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -23,7 +19,7 @@ public class TaskController {
     private TaskService taskService;
 
     @Autowired
-    private TaskServiceImpl taskFindByProjectId;
+    private TaskServiceImpl taskServiceImpl;
     @Autowired
     private UserService userService;
     @Autowired
@@ -49,7 +45,7 @@ public class TaskController {
         return "/listTask";
     }
 
-    @GetMapping("/list")
+    @GetMapping()
     public String listTask(Model model) {
         List<Task> taskList = taskService.findAll();
         model.addAttribute("tasks", taskList);
@@ -60,7 +56,7 @@ public class TaskController {
 
     @GetMapping("/detail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
-        model.addAttribute("taskByProjectId", taskFindByProjectId.findByProjectIdAndTaskId(id));
+        model.addAttribute("taskByProjectId", taskServiceImpl.findByProjectIdAndTaskId(id));
         model.addAttribute("totalTime", scheduleTaskService.totalTime(id));
         return "/detailTask";
     }
@@ -84,15 +80,6 @@ public class TaskController {
         model.addAttribute("tasks", taskList);
         return "/listTask";
     }
-
-    @GetMapping("/delete/{id}")
-    public String deleteTask(@PathVariable Long id, Model model) {
-        taskService.remove(id);
-        List<Task> tasks = taskService.findAll();
-        model.addAttribute("tasks", tasks);
-        return "/listTask";
-    }
-
 
 
 

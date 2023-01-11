@@ -1,6 +1,8 @@
 package com.example.task.service.impl;
 
+import com.example.task.Entity.Task;
 import com.example.task.Entity.TaskDetail;
+import com.example.task.Repository.ScheduleTaskRepository;
 import com.example.task.Repository.TaskDetailRepository;
 import com.example.task.service.TaskDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,11 @@ import java.util.List;
 public class TaskDetailServiceImpl implements TaskDetailService {
     @Autowired
     TaskDetailRepository detailRepository;
+    @Autowired
+    ScheduleTaskRepository scheduleTaskRepository;
+
+    @Autowired
+    TaskDetailRepository taskDetailRepository;
 
     @Override
     public List<TaskDetail> findAll() {
@@ -78,6 +85,14 @@ public class TaskDetailServiceImpl implements TaskDetailService {
     @Override
     public List<TaskDetail> findAllTaskByTaskId(Long id) {
         return detailRepository.findAllTaskByTaskId(id);
+    }
+
+    public void deleteTaskById(Long taskId){
+        List<TaskDetail> tasks = taskDetailRepository.findTaskByTaskId(taskId);
+        for (TaskDetail task : tasks) {
+            scheduleTaskRepository.deleteTaskId(task.getId());
+        }
+        detailRepository.deleteById(taskId);
     }
 
 

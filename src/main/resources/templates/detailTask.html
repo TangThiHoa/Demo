@@ -23,9 +23,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/task/list}">Task </a>
-                </li>
             </ul>
         </div>
     </div>
@@ -49,9 +46,7 @@
             <th> Member</th>
             <th> Total Time work</th>
             <th> Action</th>
-            <th> Action</th>
-            <th> Action</th>
-        </tr>
+
         </thead>
         <tbody>
         <tr th:each="item : ${taskByProjectId}">
@@ -60,8 +55,6 @@
                    th:text="${item.getName()}"></a></td>
             <td th:text="${item.getUser().getUsername()}"></td>
             <td th:text="${totalTime}"></td>
-            <td><a th:href="@{/task/edit/{id}(id=${item.getId()})}">Edit</a></td>
-            <td><a th:href="@{/task/delete/{id}(id=${item.getId()})}">Delete</a></td>
             <td><a th:href="@{/scheduleTask/detail/{id}(id=${item.getId()})}">Schedule</a></td>
 
         </tr>

@@ -1,9 +1,11 @@
 package com.example.task.service.impl;
 
 import com.example.task.Entity.ScheduleTask;
+import com.example.task.Entity.Task;
 import com.example.task.Entity.TaskDetail;
 import com.example.task.Repository.ScheduleTaskRepository;
 import com.example.task.Repository.TaskDetailRepository;
+import com.example.task.Repository.TaskRepository;
 import com.example.task.service.ScheduleTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
 
     @Autowired
     TaskDetailRepository taskDetailRepository;
+
+    @Autowired
+    TaskRepository taskRepository;
 
     @Override
     public List<ScheduleTask> findAll() {
@@ -61,6 +66,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
         save.setWorkTime(Integer.parseInt(taskDetail.getRealTime()));
         return scheduleTaskRepository.save(save);
     }
+
 
 
 }

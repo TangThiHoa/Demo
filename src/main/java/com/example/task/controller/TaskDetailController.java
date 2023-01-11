@@ -1,10 +1,12 @@
 package com.example.task.controller;
 
+import com.example.task.Entity.Task;
 import com.example.task.Entity.TaskDetail;
 import com.example.task.Repository.TaskDetailRepository;
 import com.example.task.service.TaskDetailService;
 import com.example.task.service.TaskService;
 import com.example.task.service.impl.ScheduleTaskServiceImpl;
+import com.example.task.service.impl.TaskDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,9 @@ import java.util.List;
 public class TaskDetailController {
     @Autowired
     TaskDetailService taskDetailService;
+
+    @Autowired
+    TaskDetailServiceImpl taskDetailServiceImpl;
 
     @Autowired
     TaskDetailRepository taskDetailRepository;
@@ -58,15 +63,6 @@ public class TaskDetailController {
         return "newListTaskDetail";
     }
 
-
-    @GetMapping("/delete/{id}")
-    public String deleteTaskDetail(@PathVariable Long id, Model model) {
-        taskDetailService.remove(id);
-        List<TaskDetail> taskDetails = taskDetailService.findAll();
-        model.addAttribute("listTaskId", taskDetails);
-        return "/taskDetailFull";
-    }
-
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("updateTaskDetail", taskDetailService.findById(id));
@@ -90,6 +86,7 @@ public class TaskDetailController {
         updateTaskDetail.setUpdateBy(taskDetail.getUpdateBy());
         updateTaskDetail.setUpdateDate(taskDetail.getUpdateDate());
         taskDetailService.save(updateTaskDetail);
+        scheduleTaskService.save(taskDetail);
         List<TaskDetail> detailList = taskDetailService.findAllTask();
         model.addAttribute("listTaskDetail", detailList);
         return "taskDetailFull";
@@ -102,13 +99,11 @@ public class TaskDetailController {
         return "taskDetailFull";
     }
 
-
-//    @GetMapping("/search")
-//    public String search(Model model, @ModelAttribute("userRequestDTO") UserRequestDTO userRequestDTO) {
-//        List<TaskDetail> list = taskDetailService.findAllTaskByUserName(userRequestDTO.getFindByUser());
-//        model.addAttribute("listTaskDetail", list);
-//        return "listTaskDetail";
-//    }
+    @GetMapping("/delete/{id}")
+    public String deleteTask(@PathVariable Long id) {
+        taskDetailServiceImpl.deleteTaskById(id);
+        return "/taskDetailFull";
+    }
 
 
 }

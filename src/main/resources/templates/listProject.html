@@ -48,7 +48,7 @@
             <td><a th:href="@{task/detail/{id}/(id=${item.getId()})}"
                    th:text="${item.getProjectName()}"></a></td>
             <td th:text="${item.getDescription()}"></td>
-            <td><a th:href="@{/project/edit/{id}(id=${item.getId()})}">Edit</a></td>
+            <td><a th:href="@{/project/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>
