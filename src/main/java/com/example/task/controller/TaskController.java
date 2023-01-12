@@ -1,4 +1,5 @@
 package com.example.task.controller;
+
 import com.example.task.Entity.Task;
 import com.example.task.service.ProjectService;
 import com.example.task.service.ScheduleTaskService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
 @RequestMapping("task")
 @Controller
 public class TaskController {
@@ -26,7 +28,6 @@ public class TaskController {
     private ProjectService projectService;
     @Autowired
     ScheduleTaskService scheduleTaskService;
-
 
 
     @GetMapping("/add")
@@ -54,8 +55,8 @@ public class TaskController {
 
     @GetMapping("/detail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
-        model.addAttribute("taskByProjectId", taskServiceImpl.findByProjectIdAndTaskId(id));
-        model.addAttribute("totalTime", scheduleTaskService.totalTime(id));
+        List<Task> taskList = taskServiceImpl.findByProjectIdAndTaskId(id);
+        model.addAttribute("taskByProjectId", taskList);
         return "/detailTask";
     }
 
@@ -78,7 +79,6 @@ public class TaskController {
         model.addAttribute("tasks", taskList);
         return "/listTask";
     }
-
 
 
 }

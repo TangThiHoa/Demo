@@ -54,7 +54,7 @@
             <td><a th:href="@{/taskDetail/listDetail/{id}(id=${item.getId()})}"
                    th:text="${item.getName()}"></a></td>
             <td th:text="${item.getUser().getUsername()}"></td>
-            <td th:text="${totalTime}"></td>
+            <td th:text="${item.getTotalAmount()}"></td>
             <td><a th:href="@{/scheduleTask/detail/{id}(id=${item.getId()})}">Schedule</a></td>
 
         </tr>

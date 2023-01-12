@@ -35,7 +35,7 @@ public class LoginController {
         model.addAttribute("userLogin", user);
         return "/login";
     }
-    @PostMapping("/user")
+    @PostMapping("/project")
     public String users(Model model, @Valid @ModelAttribute("userLogin") UserLoginRequest user) {
         model.addAttribute("userLogin", user);
         Authentication authentication = authenticationManager.authenticate(

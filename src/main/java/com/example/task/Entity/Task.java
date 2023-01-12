@@ -30,6 +30,9 @@ public class Task {
     @OneToMany(fetch = FetchType.EAGER, mappedBy="task")
     private Set<ScheduleTask> scheduleTasks;
 
+    @Transient
+    private int totalAmount;
+
 
 
 
