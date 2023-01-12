@@ -52,8 +52,6 @@ public class TaskController {
         return "/listTask";
     }
 
-
-
     @GetMapping("/detail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
         model.addAttribute("taskByProjectId", taskServiceImpl.findByProjectIdAndTaskId(id));

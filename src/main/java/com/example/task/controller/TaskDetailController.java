@@ -58,7 +58,6 @@ public class TaskDetailController {
 
     @GetMapping("detail/{id}")
     public String detailProject(@PathVariable Long id, Model model) {
-        model.addAttribute("sum", taskDetailService.sumEstimate(id));
         model.addAttribute("listByUserId", taskDetailService.findAllTaskByUserId(id));
         return "newListTaskDetail";
     }
