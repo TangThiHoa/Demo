@@ -73,8 +73,8 @@
             <td th:each="item1 : ${item.getTask().getProject()}"  th:text="${item1.getProjectName()}"></td>
             <td th:text="${item.getTask().getProject().getDescription()}"></td>
             <td th:text="${item.getTask().getName()}"></td>
-            <td><i class="fa fa-globe"><a th:href="${item.getLinkProject()}" th:text="${item.getLinkProject()}"></a></i></td>
-            <td><i class="fa fa-globe"><a th:href="${item.getLinkTask()}" th:text="${item.getLinkTask()}"></a></i></td>
+            <td><i class="fa fa-globe"><a style="text-decoration: none" th:href="${item.getLinkProject()}" th:text="${item.getLinkProject()}"></a></i></td>
+            <td><i class="fa fa-globe"><a style="text-decoration: none" th:href="${item.getLinkTask()}" th:text="${item.getLinkTask()}"></a></i></td>
             <td th:text="${item.getCreateDate()}"></td>
             <td th:text="${item.getUpdateDate()}"></td>
             <td th:text="${item.getEstimateTime()}"></td>

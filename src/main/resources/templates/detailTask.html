@@ -51,7 +51,7 @@
         <tbody>
         <tr th:each="item : ${taskByProjectId}">
             <td th:text="${item.getId()}"></td>
-            <td><a th:href="@{/taskDetail/listDetail/{id}(id=${item.getId()})}"
+            <td><a style="text-decoration: none" th:href="@{/taskDetail/listDetail/{id}(id=${item.getId()})}"
                    th:text="${item.getName()}"></a></td>
             <td th:text="${item.getUser().getUsername()}"></td>
             <td th:text="${item.getTotalAmount()}"></td>
