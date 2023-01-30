@@ -1,7 +1,5 @@
 package com.example.task.controller;
 import com.example.task.Entity.Project;
-import com.example.task.Entity.Task;
-import com.example.task.Repository.UserRepository;
 import com.example.task.request.UserLoginRequest;
 import com.example.task.service.ProjectService;
 import com.example.task.service.TaskService;

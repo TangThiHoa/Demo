@@ -1,4 +1,5 @@
 package com.example.task.Repository;
+
 import com.example.task.Entity.ScheduleTask;
 import com.example.task.Entity.TaskDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface ScheduleTaskRepository extends JpaRepository<ScheduleTask,Long> {
+public interface ScheduleTaskRepository extends JpaRepository<ScheduleTask, Long> {
     @Transactional
     @Modifying
     @Query(nativeQuery = true, value = "DELETE FROM schedule_task st where st.task_id =:taskId")
@@ -20,7 +21,13 @@ public interface ScheduleTaskRepository extends JpaRepository<ScheduleTask,Long>
     @Query(nativeQuery = true, value = " select sum(work_time) from schedule_task join task t on t.id = schedule_task.task_id where task_id =:taskId ")
     int totalTime(@Param("taskId") Long taskId);
 
-    @Query(nativeQuery = true, value = " select * from schedule_task where task_id=:taskId ")
+    @Query(nativeQuery = true, value = "select * " +
+            "from schedule_task st " +
+            "join project p on p.id = st.task_id " +
+            "join task t on p.id = t.project_id " +
+            "join user_table ut on ut.id = t.user_id " +
+            "join task_detail td on t.id = td.task_id " +
+            "where t.id = :taskId and st.work_date = td.update_date ")
     List<ScheduleTask> findScheduleTaskByIdTask(@Param("taskId") Long taskId);
 
     @Query(nativeQuery = true, value = " select * from task_detail where task_id=:taskId ")

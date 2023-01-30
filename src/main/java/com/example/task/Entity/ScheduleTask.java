@@ -23,7 +23,7 @@ public class ScheduleTask {
     private LocalDate workDate;
 
     @Column(name = "work_time")
-    @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern="yyyy-MM-dd 'T'HH:mm")
     private int workTime;
 
 

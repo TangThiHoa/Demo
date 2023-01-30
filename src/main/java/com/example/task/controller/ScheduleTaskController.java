@@ -1,4 +1,5 @@
 package com.example.task.controller;
+
 import com.example.task.Entity.ScheduleTask;
 import com.example.task.service.ScheduleTaskService;
 import com.example.task.service.TaskService;
@@ -47,15 +48,13 @@ public class ScheduleTaskController {
         List<ScheduleTask> scheduleTasks = scheduleTaskService.findAll();
         model.addAttribute("scheduleList", scheduleTasks);
         return "listSchedule";
-
     }
 
     @GetMapping("/detail/{id}")
     public String detailSchedule(@PathVariable Long id, Model model) {
-        model.addAttribute("detailSchedule", scheduleTaskService.findScheduleTaskByIdTask(id));
-        model.addAttribute("totalTime", scheduleTaskService.totalTime(id));
+        List<ScheduleTask> scheduleTasks = scheduleTaskService.findScheduleTaskByIdTask(id);
+        model.addAttribute("detailSchedule", scheduleTasks);
         return "detailSchedule";
-
     }
 
     @GetMapping("/edit/{id}")
