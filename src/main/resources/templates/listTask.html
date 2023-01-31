@@ -56,8 +56,8 @@
             <td th:text="${item.getUser().getUsername()}">>
             </td>
             <td th:text="${item.getName()}"></td>
-            <td><a th:text="${item.getProject().getProjectName()}"></a></td>
-
+            <td><a style="text-decoration: none" th:href="@{/task/detail/{id}/(id=${item.getId()})}"
+                   th:text="${item.getProject()}"></a></td>
         </tr>
 
 
