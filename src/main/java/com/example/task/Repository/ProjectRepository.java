@@ -16,6 +16,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query(nativeQuery = true, value = "select * from project join task t on project.id = t.project_id where project_id = :project_id ")
     List<Project> findTaskByProjectId(@Param("project_id") Long projectId);
 
-    @Query(nativeQuery = true, value = "select * from project join task t on project.id = t.project_id where project_id = :project_id ")
-    List<Project> findTaskByUserId(@Param("project_id") Long projectId);
+    @Query(nativeQuery = true, value = "select * from project join task t on project.id = t.project_id where user_id =:user_id ")
+    List<Project> findTaskByUserId(@Param("user_id") Long userId);
 }
