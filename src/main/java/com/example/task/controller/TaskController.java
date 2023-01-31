@@ -1,4 +1,5 @@
 package com.example.task.controller;
+
 import com.example.task.Entity.Task;
 import com.example.task.service.ProjectService;
 import com.example.task.service.ScheduleTaskService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -39,9 +41,7 @@ public class TaskController {
     @PostMapping("/project")
     public String create(@Valid @ModelAttribute("newTask") Task task, Model model) {
         taskService.save(task);
-        List<Task> taskList = taskService.findAll();
-        model.addAttribute("tasks", taskList);
-        return "/listTask";
+        return "redirect:/listTask";
     }
 
     @GetMapping()
@@ -75,7 +75,7 @@ public class TaskController {
         taskService.save(updateTask);
         List<Task> taskList = taskService.findAll();
         model.addAttribute("tasks", taskList);
-        return "/listTask";
+        return "redirect:/listTask";
     }
 
 

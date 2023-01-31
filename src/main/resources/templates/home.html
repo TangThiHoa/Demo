@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extrase/spring-security">
+>
 <head>
     <meta charset="UTF-8">
     <title>Registration and Login System</title>
@@ -23,44 +23,33 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/scheduleTask/list}">Schedule </a>
-                </li>
             </ul>
         </div>
     </div>
 </nav>
 <br>
 <div>
-    <button><a th:href="@{/task/add}">Add Task </a></button>
+    <button><a th:href="@{/project/add}"> Add Project </a></button>
 </div>
 <br>
 <div class="container" style=" max-width: 16890px">
-    <div class="row col-md-10">
-        <h2>List Task</h2>
-    </div>
-    <br>
     <table class="table table-bordered table-hover">
         <thead class="table-success">
         <tr>
             <th>ID</th>
-            <th> Member</th>
-            <th> Task</th>
-            <th> Project</th>
-
+            <th> Name</th>
+            <th> Description</th>
+            <th> Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item : ${tasks}">
+        <tr th:each="item : ${projectList}">
             <td th:text="${item.getId()}"></td>
-            <td th:text="${item.getUser().getUsername()}">>
-            </td>
-            <td th:text="${item.getName()}"></td>
-            <td><a style="text-decoration: none" th:href="@{/task/listTaskOfProject/{id}/(id=${item.getId()})}" th:text="${item.getProject().getProjectName()}"></a></td>
-
+            <td><a style="text-decoration: none" th:href="@{/task/detail/{id}/(id=${item.getId()})}"
+                   th:text="${item.getProjectName()}"></a></td>
+            <td th:text="${item.getDescription()}"></td>
+            <td><a th:href="@{/project/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
-
-
         </tbody>
     </table>
 </div>

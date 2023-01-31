@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+>
 <head>
     <meta charset="UTF-8">
     <title>Registration and Login System</title>
@@ -43,7 +43,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr sec:authorize="hasAnyRole('USER','ADMIN')" th:each="item : ${projectList}">
+        <tr th:each="item : ${projectList}">
             <td th:text="${item.getId()}"></td>
             <td><a style="text-decoration: none" th:href="@{/task/detail/{id}/(id=${item.getId()})}"
                    th:text="${item.getProjectName()}"></a></td>

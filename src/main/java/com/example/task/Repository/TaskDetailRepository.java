@@ -25,7 +25,7 @@ public interface TaskDetailRepository extends JpaRepository<TaskDetail, Long> {
             "join project p on p.id = t.project_id " +
             "join schedule_task st on t.id = st.task_id " +
             "where st.task_id = :taskId " +
-            "and st.work_date = task_detail.update_date ")
+            " and st.work_date = task_detail.update_date ")
     List<TaskDetail> findTaskByTaskId(@Param("taskId") Long id);
 
     @Query(nativeQuery = true, value = "select * from project " +

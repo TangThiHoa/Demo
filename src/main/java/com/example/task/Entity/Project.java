@@ -20,8 +20,9 @@ public class Project {
     @Column(name = "project_name")
     private String projectName;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy="project")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "project")
     private Set<Task> taskList;
+
 
 
 }

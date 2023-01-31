@@ -45,19 +45,11 @@
     <div class="row col-md-10">
         <h2>Manager Task Detail</h2>
     </div>
-
-    <!--    <form th:action="@{/taskDetail/search}" th:object="${userRequestDTO}" method="get">-->
-    <!--        <input type="text" name="username" th:field="*{findByUser}" placeholder="Find task by user" size="50">-->
-    <!--        <button type="submit">Search</button>-->
-    <!--        <button type="submit">Reload</button>-->
-    <!--    </form>-->
-    <!--    <br>-->
-
     <table class="table table-bordered table-hover">
         <thead class="table-success">
         <tr>
             <th>ID</th>
-            <th> Member</th>
+<!--            <th> Member</th>-->
             <th> Project Name</th>
             <th> Description Project</th>
             <th> Task Name</th>
@@ -67,14 +59,12 @@
             <th> Update Date Detail</th>
             <th> Estimate Time</th>
             <th> Description Task</th>
-            <th> Total estimate </th>
-
         </tr>
         </thead>
         <tbody>
         <tr th:each="item : ${listByUserId}">
             <td th:text="${item.getId()}"></td>
-            <td th:each="item1 : ${item.getTask().getUser()}" th:text="${item1.getUsername()}"></td>
+<!--            <td th:each="item1 : ${item.getTask().getUser()}" th:text="${item1.getUsername()}"></td>-->
             <td th:text="${item.getTask().getProject().getProjectName()}"></td>
             <td th:text="${item.getTask().getProject().getDescription()}"></td>
             <td th:text="${item.getTask().getName()}"></td>
@@ -84,7 +74,6 @@
             <td th:text="${item.getUpdateDate()}"></td>
             <td th:text="${item.getEstimateTime()}"></td>
             <td th:text="${item.getDescription()}"></td>
-            <td th:text="${sum}"></td>
             <!--            <td><a th:href="@{/taskDetail/detail/{id}(id=${item.getId()})}">Detail</a></td>-->
             <!--            <td><a th:href="@{/taskDetail/edit/{id}(id=${item.getId()})}">Edit</a></td>-->
             <!--            <td><a th:href="@{/taskDetail/delete/{id}(id=${item.getId()})}">Delete</a></td>-->
