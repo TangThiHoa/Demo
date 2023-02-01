@@ -34,24 +34,6 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
 
     }
-
-    @Override
-    public void remove(Long id) {
-        taskRepository.deleteById(id);
-
-    }
-
-    @Override
-    public List<Task> findByTaskId(Long id) {
-        return taskRepository.findByTaskId(id);
-    }
-
-    @Override
-    public List<Task> findByProjectId(Long id) {
-        return taskRepository.findByProjectId(id);
-    }
-
-
     public List<Task> findByProjectIdAndTaskId(Long id) {
         List<Task> tasks = taskRepository.findByProjectId(id);
         for (Task task : tasks) {

@@ -8,8 +8,6 @@ import com.example.task.Repository.TaskRepository;
 import com.example.task.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import java.util.List;
 
 @Service
@@ -17,16 +15,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     ProjectRepository projectRepository;
-
     @Autowired
     TaskRepository taskRepository;
-
     @Autowired
     TaskDetailRepository taskDetailRepository;
-
     @Autowired
     ScheduleTaskRepository scheduleTaskRepository;
-
     @Override
     public List<Project> findAll() {
         return projectRepository.findAll();
@@ -40,16 +34,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void save(Project project) {
         projectRepository.save(project);
-
     }
-
-    @Override
-    public void remove(Long id) {
-        projectRepository.deleteById(id);
-
-    }
-
-
     public void deleteProjectId(Long projectId) {
         List<Task> tasks = taskRepository.findByProjectId(projectId);
         for (Task task : tasks) {
@@ -58,11 +43,5 @@ public class ProjectServiceImpl implements ProjectService {
         }
         taskRepository.deleteProjectId(projectId);
         projectRepository.deleteById(projectId);
-    }
-
-
-    @Override
-    public List<Project> findTaskByProjectId(Long projectId) {
-        return projectRepository.findTaskByProjectId(projectId);
     }
 }

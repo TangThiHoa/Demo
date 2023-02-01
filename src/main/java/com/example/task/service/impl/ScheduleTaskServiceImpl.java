@@ -39,26 +39,9 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
     }
 
     @Override
-    public void remove(Long id) {
-        scheduleTaskRepository.deleteById(id);
-
-    }
-
-    @Override
-    public int totalTime(Long taskId) {
-        return scheduleTaskRepository.totalTime(taskId);
-    }
-
-    @Override
     public List<ScheduleTask> findScheduleTaskByIdTask(Long taskId) {
         return scheduleTaskRepository.findScheduleTaskByIdTask(taskId);
     }
-
-    @Override
-    public List<TaskDetail> findTaskDetailByTaskId(Long taskId) {
-        return scheduleTaskRepository.findTaskDetailByTaskId(taskId);
-    }
-
     public ScheduleTask save(TaskDetail taskDetail) {
         ScheduleTask save = new ScheduleTask();
         save.setTask(taskDetail.getTask());

@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.List;
-
 @Controller
 @RequestMapping("project")
 public class ProjectController {
@@ -19,13 +17,6 @@ public class ProjectController {
 
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
-
-    @GetMapping("/listProject")
-    public String listProject(Model model) {
-        List<Project> projects = projectService.findAll();
-        model.addAttribute("projectList", projects);
-        return "project/listProject";
-    }
 
     @GetMapping("/add")
     public String addFormProject(Model model) {
@@ -41,23 +32,6 @@ public class ProjectController {
         return "project/listProject";
     }
 
-    @GetMapping("/edit/{id}")
-    public ModelAndView editForm(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("project/editProject");
-        modelAndView.addObject("projects", projectService.findById(id));
-        return modelAndView;
-
-    }
-
-    @PostMapping("/update/{id}")
-    public String updateProject(@PathVariable Long id, @ModelAttribute("projects") Project project, Model model) {
-        Project projectServiceById = projectService.findById(id);
-        projectServiceById.setProjectName(project.getProjectName());
-        projectServiceById.setDescription(project.getDescription());
-        projectService.save(projectServiceById);
-        model.addAttribute("projectList", projectService.findAll());
-        return "project/listProject";
-    }
     @GetMapping("/delete/{projectId}")
     public String deleteProject(@PathVariable Long projectId, Model model) {
         projectServiceImpl.deleteProjectId(projectId);

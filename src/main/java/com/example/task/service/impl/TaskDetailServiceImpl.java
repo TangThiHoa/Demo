@@ -1,6 +1,4 @@
 package com.example.task.service.impl;
-
-import com.example.task.Entity.Task;
 import com.example.task.Entity.TaskDetail;
 import com.example.task.Repository.ScheduleTaskRepository;
 import com.example.task.Repository.TaskDetailRepository;
@@ -35,13 +33,6 @@ public class TaskDetailServiceImpl implements TaskDetailService {
         detailRepository.save(taskDetail);
 
     }
-
-    @Override
-    public void remove(Long id) {
-        detailRepository.deleteById(id);
-
-    }
-
     @Override
     public int sumEstimate(Long id) {
         List<TaskDetail> taskDetails = detailRepository.findByIds(id);
@@ -52,40 +43,12 @@ public class TaskDetailServiceImpl implements TaskDetailService {
         return sum;
     }
 
-    @Override
-    public List<TaskDetail> findByIds(Long id) {
-        return detailRepository.findByIds(id);
-    }
-
-    @Override
-    public List<TaskDetail> findByProjectId(Long id) {
-        return detailRepository.findByProjectId(id);
-    }
-
-    @Override
-    public List<TaskDetail> findAllTaskByUserName(String user) {
-        return detailRepository.findAllTaskByUserName(user);
-    }
-
-    @Override
-    public List<TaskDetail> findAllTaskByUserId(Long id) {
-        return detailRepository.findAllTaskByUserId(id);
-    }
-
-    @Override
-    public List<TaskDetail> findAllTaskByProjectName(String project) {
-        return detailRepository.findAllTaskByProjectName(project);
-    }
 
     @Override
     public List<TaskDetail> findAllTask() {
         return detailRepository.findAllTask();
     }
 
-    @Override
-    public List<TaskDetail> findAllTaskByTaskId(Long id) {
-        return detailRepository.findAllTaskByTaskId(id);
-    }
 
     public void deleteTaskById(Long taskId){
         List<TaskDetail> tasks = taskDetailRepository.findTaskByTaskId(taskId);

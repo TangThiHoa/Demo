@@ -1,5 +1,4 @@
 package com.example.task.service.impl;
-
 import com.example.task.Entity.Role;
 import com.example.task.Entity.User;
 import com.example.task.Repository.RoleRepository;
@@ -114,11 +113,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         return userRepository.findById(id).get();
-    }
-
-    @Override
-    public void remove(Long id) {
-        userRepository.deleteById(id);
     }
 
 

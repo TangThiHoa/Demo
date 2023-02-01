@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.List;
-
 @RequestMapping("/user")
 @Controller
 public class UserController {
@@ -26,20 +24,6 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping("/list")
-    public ModelAndView listUser() {
-        List<User> users = userService.findAll();
-        ModelAndView modelAndView = new ModelAndView("user/listUser");
-        modelAndView.addObject("users", users);
-        return modelAndView;
-    }
-
-    @GetMapping("/detail/{id}")
-    public ModelAndView detail(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("user/userDetail");
-        modelAndView.addObject("users", userService.findById(id));
-        return modelAndView;
-    }
     @GetMapping("/edit/{id}")
     public ModelAndView showEdit(@PathVariable Long id, Model model) {
         ModelAndView modelAndView = new ModelAndView("user/editUser");
@@ -47,25 +31,13 @@ public class UserController {
         return modelAndView;
     }
     @PostMapping("/update/{id}")
-    public ModelAndView update(@PathVariable Long id, @ModelAttribute("userEdit") UserRequest user) {
+    public String update(@PathVariable Long id, @ModelAttribute("userEdit") UserRequest user) {
         User service = userService.findById(id);
         service.setUsername(user.getUserName());
         service.setPassword(passwordEncoder.encode(user.getPassword()));
         service.setEmail(user.getEmail());
         service.setConfirmPassword(user.getConfirmPassword());
         userRepository.save(service);
-        ModelAndView modelAndView = new ModelAndView("redirect:/user/list");
-        return modelAndView;
+        return "redirect:/user/list";
     }
-    @GetMapping("/delete/{id}")
-    public ModelAndView delete(@PathVariable Long id, ModelAndView modelAndView) {
-        userService.remove(id);
-        List<User> users = userService.findAll();
-        modelAndView = new ModelAndView("user/user");
-        modelAndView.addObject("userList", users);
-        return modelAndView;
-    }
-
-
-
 }

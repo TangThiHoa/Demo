@@ -1,10 +1,8 @@
 package com.example.task.request;
-import com.example.task.Entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
