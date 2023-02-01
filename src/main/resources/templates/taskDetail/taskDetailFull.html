@@ -29,42 +29,46 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/list}">TaskDetail </a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/home}">Home</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 <br>
-
+<br>
 <div>
-    <button><a th:href="@{/taskDetail/add}"> Add Task </a></button>
+    <button><a th:href="@{/taskDetail/add}"> Add TaskDetail </a></button>
 </div>
 <br>
 <div class="container" style=" max-width: 16890px">
     <div class="row col-md-10">
-        <h2>Manager Task Detail</h2>
+        <h2>List Task Of User </h2>
     </div>
+    <br>
     <table class="table table-bordered table-hover">
         <thead class="table-success">
         <tr>
             <th>ID</th>
-<!--            <th> Member</th>-->
+            <th> Member</th>
             <th> Project Name</th>
             <th> Description Project</th>
             <th> Task Name</th>
             <th> Link Project</th>
             <th> Link Task</th>
-            <th> Create Date Detail</th>
-            <th> Update Date Detail</th>
+            <th> Date create detail</th>
+            <th> Update date detail</th>
             <th> Estimate Time</th>
             <th> Description Task</th>
+            <th> Action</th>
+            <th> Action</th>
+
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item : ${listByUserId}">
+        <tr th:each="item : ${listTaskId}">
             <td th:text="${item.getId()}"></td>
-<!--            <td th:each="item1 : ${item.getTask().getUser()}" th:text="${item1.getUsername()}"></td>-->
+            <td th:each="item1 : ${item.getTask().getUser()}" th:text="${item1.getUsername()}"></td>
             <td th:text="${item.getTask().getProject().getProjectName()}"></td>
             <td th:text="${item.getTask().getProject().getDescription()}"></td>
             <td th:text="${item.getTask().getName()}"></td>
@@ -74,13 +78,12 @@
             <td th:text="${item.getUpdateDate()}"></td>
             <td th:text="${item.getEstimateTime()}"></td>
             <td th:text="${item.getDescription()}"></td>
-            <!--            <td><a th:href="@{/taskDetail/detail/{id}(id=${item.getId()})}">Detail</a></td>-->
-            <!--            <td><a th:href="@{/taskDetail/edit/{id}(id=${item.getId()})}">Edit</a></td>-->
-            <!--            <td><a th:href="@{/taskDetail/delete/{id}(id=${item.getId()})}">Delete</a></td>-->
-        </tr>
+            <td><a th:href="@{/taskDetail/edit/{id}(id=${item.getId()})}">Edit</a></td>
+            <td><a th:href="@{/taskDetail/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

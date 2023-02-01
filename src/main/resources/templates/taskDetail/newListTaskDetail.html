@@ -9,13 +9,15 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary text-white">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/index}"></a>
@@ -28,27 +30,23 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/taskDetail/list}">TaskDetail </a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
 <br>
+
 <div>
-    <button><a th:href="@{/taskDetail/add}"> Add TaskDetail </a></button>
+    <button><a th:href="@{/taskDetail/add}"> Add Task </a></button>
 </div>
 <br>
 <div class="container" style=" max-width: 16890px">
     <div class="row col-md-10">
         <h2>Manager Task Detail</h2>
     </div>
-
-<!--    <form th:action="@{/taskDetail/search}" th:object="${userRequestDTO}" method="get">-->
-<!--        <input type="text" name="username" th:field="*{findByUser}" placeholder="Find task by user" size="50">-->
-<!--        <button type="submit">Search</button>-->
-<!--        <button type="submit">Reload</button>-->
-<!--    </form>-->
-<!--    <br>-->
-
     <table class="table table-bordered table-hover">
         <thead class="table-success">
         <tr>
@@ -59,34 +57,41 @@
             <th> Task Name</th>
             <th> Link Project</th>
             <th> Link Task</th>
-            <th> Create Date</th>
-            <th> Update Date</th>
+            <th> Create Date Detail</th>
+            <th> Update Date Detail</th>
             <th> Estimate Time</th>
             <th> Description Task</th>
-
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item : ${listTaskDetails}">
+        <tr th:each="item : ${listByUserId}">
             <td th:text="${item.getId()}"></td>
             <td th:each="item1 : ${item.getTask().getUser()}" th:text="${item1.getUsername()}"></td>
-            <td th:each="item1 : ${item.getTask().getProject()}"  th:text="${item1.getProjectName()}"></td>
+            <td th:text="${item.getTask().getProject().getProjectName()}"></td>
             <td th:text="${item.getTask().getProject().getDescription()}"></td>
             <td th:text="${item.getTask().getName()}"></td>
-            <td><i class="fa fa-globe"><a style="text-decoration: none" th:href="${item.getLinkProject()}" th:text="${item.getLinkProject()}"></a></i></td>
-            <td><i class="fa fa-globe"><a style="text-decoration: none" th:href="${item.getLinkTask()}" th:text="${item.getLinkTask()}"></a></i></td>
+            <td><i class="fa fa-globe"><a style="text-decoration: none" th:href="${item.getLinkProject()}"
+                                          th:text="${item.getLinkProject()}"></a></i></td>
+            <td><i class="fa fa-globe"><a style="text-decoration: none" th:href="${item.getLinkTask()}"
+                                          th:text="${item.getLinkTask()}"></a></i></td>
             <td th:text="${item.getCreateDate()}"></td>
             <td th:text="${item.getUpdateDate()}"></td>
             <td th:text="${item.getEstimateTime()}"></td>
             <td th:text="${item.getDescription()}"></td>
-
         </tr>
         </tr>
         </tbody>
     </table>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>

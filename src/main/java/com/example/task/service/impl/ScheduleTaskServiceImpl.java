@@ -63,10 +63,9 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService {
         ScheduleTask save = new ScheduleTask();
         save.setTask(taskDetail.getTask());
         save.setWorkDate(taskDetail.getUpdateDate().toLocalDate());
-        save.setWorkTime(Integer.parseInt(taskDetail.getRealTime()));
+        save.setWorkTime(taskDetail.getRealTime());
         return scheduleTaskRepository.save(save);
     }
-
 
 
 }

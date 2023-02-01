@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
-
 
 @RequestMapping("/user")
 @Controller
@@ -31,20 +29,20 @@ public class UserController {
     @GetMapping("/list")
     public ModelAndView listUser() {
         List<User> users = userService.findAll();
-        ModelAndView modelAndView = new ModelAndView("/listUser");
+        ModelAndView modelAndView = new ModelAndView("user/listUser");
         modelAndView.addObject("users", users);
         return modelAndView;
     }
 
     @GetMapping("/detail/{id}")
     public ModelAndView detail(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("userDetail");
+        ModelAndView modelAndView = new ModelAndView("user/userDetail");
         modelAndView.addObject("users", userService.findById(id));
         return modelAndView;
     }
     @GetMapping("/edit/{id}")
     public ModelAndView showEdit(@PathVariable Long id, Model model) {
-        ModelAndView modelAndView = new ModelAndView("editUser");
+        ModelAndView modelAndView = new ModelAndView("user/editUser");
         modelAndView.addObject("userEdit", userService.findById(id));
         return modelAndView;
     }
@@ -63,7 +61,7 @@ public class UserController {
     public ModelAndView delete(@PathVariable Long id, ModelAndView modelAndView) {
         userService.remove(id);
         List<User> users = userService.findAll();
-        modelAndView = new ModelAndView("/user");
+        modelAndView = new ModelAndView("user/user");
         modelAndView.addObject("userList", users);
         return modelAndView;
     }

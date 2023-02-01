@@ -1,5 +1,4 @@
 package com.example.task.controller;
-
 import com.example.task.Entity.ScheduleTask;
 import com.example.task.service.ScheduleTaskService;
 import com.example.task.service.TaskService;
@@ -7,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class ScheduleTaskController {
     public String addForm(Model model) {
         model.addAttribute("newScheduleTask", new ScheduleTask());
         model.addAttribute("tasks", taskService.findAll());
-        return "addScheduleTask";
+        return "schedule/addScheduleTask";
     }
 
     @PostMapping("/newList")
@@ -31,7 +29,7 @@ public class ScheduleTaskController {
         scheduleTaskService.save(scheduleTask);
         List<ScheduleTask> scheduleTasks = scheduleTaskService.findAll();
         model.addAttribute("scheduleList", scheduleTasks);
-        return "listSchedule";
+        return "schedule/listSchedule";
     }
 
     @GetMapping("/list")
@@ -39,7 +37,7 @@ public class ScheduleTaskController {
         List<ScheduleTask> scheduleTasks = scheduleTaskService.findAll();
         model.addAttribute("scheduleList", scheduleTasks);
 
-        return "listSchedule";
+        return "schedule/listSchedule";
     }
 
     @GetMapping("/delete/{id}")
@@ -47,21 +45,21 @@ public class ScheduleTaskController {
         scheduleTaskService.remove(id);
         List<ScheduleTask> scheduleTasks = scheduleTaskService.findAll();
         model.addAttribute("scheduleList", scheduleTasks);
-        return "listSchedule";
+        return "schedule/listSchedule";
     }
 
     @GetMapping("/detail/{id}")
     public String detailSchedule(@PathVariable Long id, Model model) {
         List<ScheduleTask> scheduleTasks = scheduleTaskService.findScheduleTaskByIdTask(id);
         model.addAttribute("detailSchedule", scheduleTasks);
-        return "detailSchedule";
+        return "schedule/detailSchedule";
     }
 
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("updateSchedule", scheduleTaskService.findById(id));
         model.addAttribute("tasks", taskService.findAll());
-        return "editSchedule";
+        return "schedule/editSchedule";
     }
 
     @PostMapping("/list/{id}")
@@ -73,7 +71,7 @@ public class ScheduleTaskController {
         scheduleTaskService.save(updateSchedule);
         List<ScheduleTask> scheduleTasks = scheduleTaskService.findAll();
         model.addAttribute("scheduleList", scheduleTasks);
-        return "listSchedule";
+        return "schedule/listSchedule";
 
     }
 

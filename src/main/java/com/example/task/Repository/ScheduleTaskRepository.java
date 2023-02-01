@@ -18,7 +18,7 @@ public interface ScheduleTaskRepository extends JpaRepository<ScheduleTask, Long
     @Query(nativeQuery = true, value = "DELETE FROM schedule_task st where st.task_id =:taskId")
     void deleteTaskId(@Param("taskId") Long taskId);
 
-    @Query(nativeQuery = true, value = " select sum(work_time) from schedule_task join task t on t.id = schedule_task.task_id where task_id =:taskId ")
+    @Query(nativeQuery = true, value = "select sum(work_time) from schedule_task join task t on t.id = schedule_task.task_id where schedule_task.task_id = :taskId ")
     int totalTime(@Param("taskId") Long taskId);
 
     @Query(nativeQuery = true, value = "select * from schedule_task st join task t on t.id = st.task_id where t.id = :taskId ")

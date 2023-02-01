@@ -30,7 +30,7 @@ public class LoginController {
     @GetMapping("/login")
     public String login(Model model, @ModelAttribute UserLoginRequest user) {
         model.addAttribute("userLogin", user);
-        return "/login";
+        return "security/login";
     }
     @PostMapping("/user")
     public String users(Model model, @Valid @ModelAttribute("userLogin") UserLoginRequest user) {

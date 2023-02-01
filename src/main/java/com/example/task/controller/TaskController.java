@@ -35,35 +35,38 @@ public class TaskController {
         model.addAttribute("newTask", new Task());
         model.addAttribute("user", userService.findAll());
         model.addAttribute("project", projectService.findAll());
-        return "addTask";
+        return "/task/addTask";
     }
 
     @PostMapping("/project")
     public String create(@Valid @ModelAttribute("newTask") Task task, Model model) {
         taskService.save(task);
-        return "redirect:/listTask";
+        List<Task> taskList = taskService.findAll();
+        model.addAttribute("tasks", taskList);
+        return "task/listTask";
     }
 
     @GetMapping()
     public String listTask(Model model) {
         List<Task> taskList = taskService.findAll();
         model.addAttribute("tasks", taskList);
-        return "/listTask";
+        return "task/listTask";
     }
 
     @GetMapping("/detail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
         List<Task> taskList = taskServiceImpl.findByProjectIdAndTaskId(id);
         model.addAttribute("taskByProjectId", taskList);
-        return "/detailTask";
+        return "/task/detailTask";
     }
+
 
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("updateTask", taskService.findById(id));
         model.addAttribute("user", userService.findAll());
         model.addAttribute("project", projectService.findAll());
-        return "editTask";
+        return "task/editTask";
     }
 
     @PostMapping("/list/{id}")
@@ -75,7 +78,7 @@ public class TaskController {
         taskService.save(updateTask);
         List<Task> taskList = taskService.findAll();
         model.addAttribute("tasks", taskList);
-        return "redirect:/listTask";
+        return "task/listTask";
     }
 
 

@@ -12,17 +12,18 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task,Long> {
 
-    @Query(nativeQuery = true, value = "select *from task where user_id =:user_id")
-    List<Task> findByTaskId(@Param("user_id") Long id);
+    @Query(nativeQuery = true, value = "select *from task where user_id =:userId")
+    List<Task> findByTaskId(@Param("userId") Long userid);
 
 
+    @Query(nativeQuery = true, value = "select * from task join user_role ur on task.user_id = ur.user_id where ur.user_id = :userId ")
+    List<Task> findByTaskByRole(@Param("userId") Long userid);
 
+    @Query(nativeQuery = true, value = "select * from task where project_id = :projectId ")
+    List<Task> findByProjectId(@Param("projectId") Long projectId);
 
-    @Query(nativeQuery = true, value = "select * from task where project_id =:project_id")
-    List<Task> findByProjectId(@Param("project_id") Long id);
-
-    @Query(nativeQuery = true, value = "select * from task join schedule_task st on task.id = st.task_id where task_id =:task_id")
-    List<Task> findTaskByTaskId(@Param("task_id") Long id);
+    @Query(nativeQuery = true, value = "select * from task join schedule_task st on task.id = st.task_id where task_id =:taskId ")
+    List<Task> findTaskByTaskId(@Param("taskId") Long taskId);
 
     @Transactional
     @Modifying

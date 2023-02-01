@@ -1,4 +1,5 @@
 package com.example.task.controller;
+
 import com.example.task.Entity.TaskDetail;
 import com.example.task.Repository.TaskDetailRepository;
 import com.example.task.service.TaskDetailService;
@@ -35,7 +36,7 @@ public class TaskDetailController {
     public String addForm(Model model) {
         model.addAttribute("addTask", new TaskDetail());
         model.addAttribute("task", taskService.findAll());
-        return "addTaskDetail";
+        return "taskDetail/addTaskDetail";
     }
 
     @PostMapping("/newList")
@@ -44,27 +45,27 @@ public class TaskDetailController {
         scheduleTaskService.save(taskDetail);
         List<TaskDetail> details = taskDetailService.findAllTask();
         model.addAttribute("listTaskDetails", details);
-        return "listTaskDetail";
+        return "taskDetail/listTaskDetail";
     }
 
     @GetMapping("/list")
     public String listTaskDetail(Model model) {
         List<TaskDetail> detailList = taskDetailService.findAllTask();
         model.addAttribute("listTaskDetails", detailList);
-        return "listTaskDetail";
+        return "taskDetail/listTaskDetail";
     }
 
     @GetMapping("detail/{id}")
     public String detailProject(@PathVariable Long id, Model model) {
         model.addAttribute("listByUserId", taskDetailService.findAllTaskByUserId(id));
-        return "newListTaskDetail";
+        return "taskDetail/newListTaskDetail";
     }
 
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("updateTaskDetail", taskDetailService.findById(id));
         model.addAttribute("task", taskDetailService.findAll());
-        return "editTaskDetail";
+        return "taskDetail/editTaskDetail";
     }
 
     @PostMapping("/list/{id}")
@@ -85,21 +86,23 @@ public class TaskDetailController {
         taskDetailService.save(updateTaskDetail);
         scheduleTaskService.save(taskDetail);
         List<TaskDetail> detailList = taskDetailService.findAllTask();
-        model.addAttribute("listTaskDetail", detailList);
-        return "taskDetailFull";
+        model.addAttribute("listTaskDetails", detailList);
+        return "taskDetail/listTaskDetail";
     }
 
     @GetMapping("/listDetail/{id}")
     public String detailTask(@PathVariable Long id, Model model) {
         model.addAttribute("sum", taskDetailService.sumEstimate(id));
         model.addAttribute("listTaskId", taskDetailRepository.findTaskByTaskId(id));
-        return "taskDetailFull";
+        return "taskDetail/taskDetailFull";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteTask(@PathVariable Long id) {
+    public String deleteTask(@PathVariable Long id, Model model) {
         taskDetailServiceImpl.deleteTaskById(id);
-        return "/taskDetailFull";
+        List<TaskDetail> detailList = taskDetailService.findAllTask();
+        model.addAttribute("listTaskDetails", detailList);
+        return "taskDetail/listTaskDetail";
     }
 
 

@@ -24,13 +24,13 @@ public class ProjectController {
     public String listProject(Model model) {
         List<Project> projects = projectService.findAll();
         model.addAttribute("projectList", projects);
-        return "/listProject";
+        return "project/listProject";
     }
 
     @GetMapping("/add")
     public String addFormProject(Model model) {
         model.addAttribute("project", new Project());
-        return "addProject";
+        return "project/addProject";
     }
 
     @PostMapping("/create")
@@ -38,12 +38,12 @@ public class ProjectController {
         projectService.save(project);
         model.addAttribute("project", new Project());
         model.addAttribute("projectList", projectService.findAll());
-        return "listProject";
+        return "project/listProject";
     }
 
     @GetMapping("/edit/{id}")
     public ModelAndView editForm(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("editProject");
+        ModelAndView modelAndView = new ModelAndView("project/editProject");
         modelAndView.addObject("projects", projectService.findById(id));
         return modelAndView;
 
@@ -56,21 +56,14 @@ public class ProjectController {
         projectServiceById.setDescription(project.getDescription());
         projectService.save(projectServiceById);
         model.addAttribute("projectList", projectService.findAll());
-        return "listProject";
+        return "project/listProject";
     }
-    @GetMapping("/detail/{id}")
-    public ModelAndView detailProject(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("projectDetail");
-        modelAndView.addObject("projects", projectService.findById(id));
-        return modelAndView;
-    }
-
     @GetMapping("/delete/{projectId}")
     public String deleteProject(@PathVariable Long projectId, Model model) {
         projectServiceImpl.deleteProjectId(projectId);
         List<Project> taskList = projectService.findAll();
         model.addAttribute("projectList", taskList);
-        return "/listProject";
+        return "redirect:project/listProject";
     }
 
 }

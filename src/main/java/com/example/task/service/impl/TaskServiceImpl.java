@@ -19,7 +19,6 @@ public class TaskServiceImpl implements TaskService {
     ScheduleTaskRepository scheduleTaskRepository;
 
 
-
     @Override
     public List<Task> findAll() {
         return taskRepository.findAll();
@@ -54,7 +53,7 @@ public class TaskServiceImpl implements TaskService {
 
 
     public List<Task> findByProjectIdAndTaskId(Long id) {
-        List<Task> tasks =   taskRepository.findByProjectId(id);
+        List<Task> tasks = taskRepository.findByProjectId(id);
         for (Task task : tasks) {
             task.setTotalAmount(scheduleTaskRepository.totalTime(task.getId()));
         }
@@ -62,5 +61,5 @@ public class TaskServiceImpl implements TaskService {
     }
 
 
-
 }
+

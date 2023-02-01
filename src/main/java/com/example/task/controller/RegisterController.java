@@ -20,7 +20,7 @@ public class RegisterController {
     public String showRegistrationForm(Model model) {
         UserRequest user = new UserRequest();
         model.addAttribute("user", user);
-        return "register";
+        return "security/register";
     }
 
     @PostMapping("/register/save")
@@ -39,9 +39,9 @@ public class RegisterController {
 
         if (result.hasErrors()) {
             model.addAttribute("user", userRequest);
-            return "/register";
+            return "security/register";
         }
         userService.saveUser(userRequest);
-        return "redirect:/register";
+        return "redirect:security/register";
     }
 }

@@ -21,33 +21,37 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log out</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/project/list}"> Manager Project </a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/home}">Home</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+<br>
+<div>
+     <button><a th:href="@{/project/add}"> Add Project </a></button>
+</div>
+<br>
 <div class="container" style=" max-width: 16890px">
-    <div class="row col-md-10">
-        <h2>Project Detail</h2>
-    </div>
     <table class="table table-bordered table-hover">
         <thead class="table-success">
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
+            <th> Name</th>
+            <th> Description</th>
+            <th> Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr >
-            <td th:text="${projects.id}"></td>
-            <td th:text="${projects.getProjectName}"></td>
-            <td th:text="${projects.description}"></td>
-
+        <tr th:each="item : ${projectList}">
+            <td th:text="${item.getId()}"></td>
+            <td><a style="text-decoration: none" th:href="@{/task/detail/{id}/(id=${item.getId()})}"
+                   th:text="${item.getProjectName()}"></a></td>
+            <td th:text="${item.getDescription()}"></td>
+            <td><a th:href="@{/project/delete/{id}(id=${item.getId()})}">Delete</a></td>
         </tr>
         </tbody>
     </table>

@@ -33,7 +33,7 @@ public class TaskDetail {
     @Column(name = "estimate_time")
     private int estimateTime;
     @Column(name = "real_time")
-    private String realTime;
+    private int realTime;
     @Column(name = "create_date")
     private Date createDate;
     @Column(name = "create_by")
